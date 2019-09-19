@@ -85,7 +85,7 @@ export default withFormik({mapPropsToValues: values =>{
 userName: yup.string().required('User name is blank.'),
 password: yup.string().min(6,'Password is not long enough').required('Password is blank'),
 email: yup.string().email().required('Email is blank'),
-name: yup.string().required('Name is blank'),//validation
+name: yup.string().required('Name is blank'),//validation for login
 }),
 handleSubmit:(values ,{setStatus}) =>{
    axios
