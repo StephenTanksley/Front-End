@@ -3,9 +3,11 @@ import { withFormik, Form, Field, } from 'formik';
 import axios from "axios";
 import * as yup from 'yup';
 import styled from 'styled-components'
+import TextField from '@material-ui/core/TextField';
 import App from "../../src/App.css"
-import { Card, CardImg, CardText, CardBody,
-   CardTitle, CardSubtitle, Button , CardLink} from 'reactstrap';
+
+
+
 
 const SomeForm = styled.div`
  
@@ -33,9 +35,9 @@ const UserDetails = ({errors, touched, status})=> {
       <Form>
       
           
-        <SomeForm>{touched.userName && errors.userName &&<p>{errors.userName}</p>}
+        <SomeForm>{touched.username && errors.username &&<p>{errors.userName}</p>}
          
-         <Field  type='userName' name='userName' placeholder='UserName'/>
+         <TextField><Field  type='username' name='username' placeholder='UserName' autoFocus/></TextField>
          
          
 
@@ -49,21 +51,23 @@ const UserDetails = ({errors, touched, status})=> {
          {touched.email && errors.email &&<p>{errors.email}</p>}
          <Field type="email" name='email' placeholder ='Email'/>
         
+         {touched.fname && errors.fname &&<p>{errors.fname}</p>}
+            <Field type='name' name='fname' placeholder='First Name'/>
          
-         
-           {touched.name && errors.name &&<p>{errors.name}</p>}
-            <Field type='name' name='name' placeholder='Name'/>
+           {touched.lname && errors.lname &&<p>{errors.lname}</p>}
+            <Field type='name' name='lname' placeholder='Last Name'/>
    
-         
+            
          
          
          
          <button type='submit'>Submit</button>
          {names.map(name =>(
             <>
-         <p>Username: {name.userName}</p>
-         <p>Name: {name.name}</p>
+         <p>Username: {name.username}</p>
+         <p>Name: {name.fname} {name.lname}</p>
          <p>Email: {name.email}</p>
+         
             </>
          ))}
      </SomeForm>
@@ -76,16 +80,20 @@ const UserDetails = ({errors, touched, status})=> {
 
 export default withFormik({mapPropsToValues: values =>{
    return{
-      userName: values.userName || "",
+      username: values.username || "",
       password: values.password || "",
       email: values.email || "",
-      name: values.name || "",//default values
+      fname: values.fname || "",//default values
+      lname: values.lname || "",
+
+
    };
 },validationSchema: yup.object().shape({
-userName: yup.string().required('User name is blank.'),
+username: yup.string().required('User name is blank.'),
 password: yup.string().min(6,'Password is not long enough').required('Password is blank'),
 email: yup.string().email().required('Email is blank'),
-name: yup.string().required('Name is blank'),//validation for login
+fname: yup.string().required('First name is blank'),
+lname: yup.string().required('Last name is blank')//validation for login
 }),
 handleSubmit:(values ,{setStatus}) =>{
    axios
