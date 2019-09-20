@@ -34,10 +34,10 @@ const UserDetails = ({errors, touched, status})=> {
      
       <Form>
       
-          
-        <SomeForm>{touched.username && errors.username &&<p>{errors.userName}</p>}
+       <SomeForm>
+         {touched.username && errors.username &&<p>{errors.userName}</p>}
          
-         <TextField><Field  type='username' name='username' placeholder='UserName' autoFocus/></TextField>
+        <Field  type='username' name='username' placeholder='UserName' autoFocus/>
          
          
 
@@ -56,7 +56,8 @@ const UserDetails = ({errors, touched, status})=> {
          
            {touched.lname && errors.lname &&<p>{errors.lname}</p>}
             <Field type='name' name='lname' placeholder='Last Name'/>
-   
+
+ 
             
          
          
