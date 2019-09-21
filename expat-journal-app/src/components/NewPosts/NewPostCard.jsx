@@ -12,7 +12,7 @@ const NewPostCard = (props) => {
   return (
     <Card>
       <CardBody>
-        {/* <CardImg src={user_supplied.image} alt={user_supplied.description} /> */}
+        {/* <CardImg src={user_supplied.image} alt={user_supplied.description} /> This is placeholder! */}
         <CardTitle><h3>Name: {entry.name}</h3></CardTitle><br />
           <CardSubtitle><h4>Date: {entry.date}</h4></CardSubtitle>
         <h5>Location (country, city): {entry.location}</h5><br />
