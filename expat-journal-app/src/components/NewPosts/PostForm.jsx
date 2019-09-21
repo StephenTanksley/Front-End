@@ -48,6 +48,4 @@ const PostForm = ({ errors, touched, status }) => {
 
     )
 
-
-
 }
