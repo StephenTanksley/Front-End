@@ -3,6 +3,7 @@ import { withFormik, Form, Field, } from 'formik';
 import axios from "axios";
 import * as yup from 'yup';
 import {Container, Card} from '../Styles/Styles'
+import {NewPostCard} from './NewPostCard'
 import TextField from '@material-ui/core/TextField';
 import App from "../../src/App.css"
 
@@ -26,7 +27,7 @@ return (
         <Container> 
             {posts.map((item, index) => {
                 return (
-                <CharacterCard 
+                <NewPostCard 
                     item = {item}
                     key = {index} />
                 )})}

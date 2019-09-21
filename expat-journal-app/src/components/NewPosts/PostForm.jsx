@@ -29,11 +29,11 @@ const PostForm = ({ errors, touched, status }) => {
             {touched.name && errors.name && <p className='error'>{errors.name}</p>}
             <Field type="text" name="name" placeholder="Name" /><br /><br />
 
-            {touched.location && errors.location && <p className='error'>{errors.location}</p>}
-            <Field type="text" name="location" placeholder="Location (country, city)" /><br /><br />
-
             {touched.date && errors.date && <p className='error'>{errors.date}</p>}
             <Field type="text" name="date" placeholder="Date" /><br /><br />
+
+            {touched.location && errors.location && <p className='error'>{errors.location}</p>}
+            <Field type="text" name="location" placeholder="Location (country, city)" /><br /><br />
 
             <button type="submit" name="submit">Submit</button>
             </Form>
