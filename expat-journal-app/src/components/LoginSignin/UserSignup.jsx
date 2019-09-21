@@ -45,8 +45,7 @@ const UserSignup = ({errors, touched, status})=> {
          {touched.password && errors.password && <p>{errors.password}</p>}
          <Field type='password' name='password' placeholder ='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
-       
-        
+   
          
          {touched.email && errors.email &&<p>{errors.email}</p>}
          <Field type="email" name='email' placeholder ='Email' autoFocus   style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
@@ -56,7 +55,6 @@ const UserSignup = ({errors, touched, status})=> {
          
            {touched.lname && errors.lname &&<p>{errors.lname}</p>}
             <Field type='name' name='lname' placeholder='Last Name' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
-
  
          <div>
             <Container>
@@ -64,11 +62,11 @@ const UserSignup = ({errors, touched, status})=> {
             </Container>
          </div> 
          
-         
-         
-         <button type='submit' style={{width:70, height: 30, borderRadius: 35}}>Submit</button>
+         <button type='submit' style={{width:70, height: 30, borderRadius: 35}}>Sign Up</button>
        
-         {/* {names.map(name =>(
+         {/* //Used just to see items which had been input into fields.  
+         
+         {names.map(name =>(
             <>
          <p>Username: {name.username}</p>
          <p>Name: {name.fname} {name.lname}</p>
@@ -77,7 +75,7 @@ const UserSignup = ({errors, touched, status})=> {
             </>
          ))} */}
  
-     </SomeForm>
+         </SomeForm>
       </Form>
 
       
@@ -89,15 +87,16 @@ const UserSignup = ({errors, touched, status})=> {
 
 export default withFormik({mapPropsToValues: values =>{
    return{
-      username: values.username || "",
+      username: values.username || "", //default values
       password: values.password || "",
       email: values.email || "",
-      fname: values.fname || "",//default values
-      lname: values.lname || "",
+      fname: values.fname || "",
+      lname: values.lname || ""
 
 
-   };
-},validationSchema: yup.object().shape({
+   }},
+
+validationSchema: yup.object().shape({
 username: yup.string().required('User name is blank.'),
 password: yup.string().min(6,'Password is not long enough').required('Password is blank'),
 email: yup.string().email().required('Email is blank'),
@@ -106,12 +105,13 @@ lname: yup.string().required('Last name is blank')//validation for login
 }),
 handleSubmit:(values, {setStatus}) =>{
    axios
-   .post("https://reqres.in/api/user", values)
+   .post("https://be-expat-journal.herokuapp.com/api/auth/register", values)
    .then(response => {
      setStatus(response.data);
+     console.log(response)
    })
    .catch(error => {
      console.log(error);
    });
 }
-})(UserSignup);//Axios some styling changes
+})(UserSignup); //Axios some styling changes
