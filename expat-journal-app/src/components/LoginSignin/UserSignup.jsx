@@ -66,15 +66,17 @@ const UserSignup = ({errors, touched, status})=> {
          
          
          
-         <button type='submit' style={{width:70, height: 30, borderRadius: 35}} >Submit</button>
-         {names.map(name =>(
+         <button type='submit' style={{width:70, height: 30, borderRadius: 35}}>Submit</button>
+       
+         {/* {names.map(name =>(
             <>
          <p>Username: {name.username}</p>
          <p>Name: {name.fname} {name.lname}</p>
          <p>Email: {name.email}</p>
          
             </>
-         ))}
+         ))} */}
+ 
      </SomeForm>
       </Form>
 
@@ -102,7 +104,7 @@ email: yup.string().email().required('Email is blank'),
 fname: yup.string().required('First name is blank'),
 lname: yup.string().required('Last name is blank')//validation for login
 }),
-handleSubmit:(values ,{setStatus}) =>{
+handleSubmit:(values, {setStatus}) =>{
    axios
    .post("https://reqres.in/api/user", values)
    .then(response => {

@@ -33,21 +33,26 @@ const UserLogin = ({touched, errors, status, values}) =>{
       <Form>
          <SomeForms>
          {touched.username && errors.username &&<p> Please fill out all fields.{/*errors.username*/}</p>}
-         <Field type='login' name='username' placeholder='Username' autofocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
+         <Field type='login' name='username' placeholder='Username' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
          {touched.password && errors.password && <p>{errors.password}</p>}
-         <Field type='password' name='password' placeholder='Password' autofocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
+         <Field type='password' name='password' placeholder='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
          <div>
             <Container>
-               <Link to='/' >Don't have an account? Sign up instead</Link>
-            </Container>
+               <Link to='/'>Don't have an account? Sign up instead</Link>
+               </Container>
          </div> 
          
 
-         </SomeForms><button type='login' style={{width:70, height: 30, borderRadius: 35}}>Login</button>
+         </SomeForms>
+         
+         <Container>
+            <button type='login' style={{width:70, height: 30, borderRadius: 35}}>Login</button>
+         </Container>
          {/* {usernames.map(name =>(
          {name.username}
          ))} */}
+
 
       </Form>
       </>
