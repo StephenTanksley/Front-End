@@ -3,6 +3,9 @@ import axios from 'axios';
 import {Form, Field, withFormik} from 'formik';
 import * as yup from 'yup';
 import styled from "styled-components"
+import {Link} from 'react-router-dom'
+import UserSignup from './UserSignup'
+import {Container} from '../Styles/Styles'
 
 const SomeForms = styled.div`
  
@@ -11,26 +14,36 @@ const SomeForms = styled.div`
   align-items: center;
   color: gray;
   font-size: .7rem;
-
-  
   `;
-const UserSignIn = ({touched, errors, status}) =>{
-   const [usernames, setUserNames] = useState([]);
-    
+
+const UserLogin = ({touched, errors, status, values}) =>{
+   const [name, setName] = useState([]);
+   
    useEffect(() => {
      if (status) {
-       setUserNames([...usernames, status]);
+       setName([...name, status]);
      }
    }, [status]);
+
+   console.log("Name", name)
+   console.log("Touched", touched)
+   console.log("Errors", errors)
    return(
       <>
       <Form>
          <SomeForms>
-         {touched.username && errors.username &&<p>{errors.username}</p>}
+         {touched.username && errors.username &&<p> Please fill out all fields.{/*errors.username*/}</p>}
          <Field type='login' name='username' placeholder='Username' autofocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
          {touched.password && errors.password && <p>{errors.password}</p>}
          <Field type='password' name='password' placeholder='Password' autofocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
+         <div>
+            <Container>
+               <Link to='/' >Don't have an account? Sign up instead</Link>
+            </Container>
+         </div> 
+         
+
          </SomeForms><button type='login' style={{width:70, height: 30, borderRadius: 35}}>Login</button>
          {/* {usernames.map(name =>(
          {name.username}
@@ -40,8 +53,8 @@ const UserSignIn = ({touched, errors, status}) =>{
       </>
 
    );
-
 }
+
 export default withFormik({mapPropsToValues: value =>{
    return{
       username: value.username || "",
@@ -63,4 +76,4 @@ axios
    });
 }
 
-})(UserSignIn)
+})(UserLogin)

@@ -3,10 +3,9 @@ import { withFormik, Form, Field, } from 'formik';
 import axios from "axios";
 import * as yup from 'yup';
 import styled from 'styled-components'
-import TextField from '@material-ui/core/TextField';
-import App from "../../src/App.css"
-import { Input } from '@material-ui/core';
-
+import {Container} from '../Styles/Styles'
+import {Link} from 'react-router-dom'
+import UserLogin from './UserLogin'
 
 
 
@@ -20,7 +19,7 @@ const SomeForm = styled.div`
   `;
 
 
-const UserDetails = ({errors, touched, status})=> {
+const UserSignup = ({errors, touched, status})=> {
    
 
       const [names, setNames] = useState([]);
@@ -30,6 +29,7 @@ const UserDetails = ({errors, touched, status})=> {
           setNames([...names, status]);
         }
       }, [status]);
+
    return (
       <>
       
@@ -37,11 +37,9 @@ const UserDetails = ({errors, touched, status})=> {
       <Form>
       
        <SomeForm>
-         {touched.username && errors.username &&<p>{errors.userName}</p>}
+         {touched.username && errors.username &&<p>{errors.username}</p>}
          
-        <Field  type='username' name='username' placeholder='UserName' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
-         
-         
+        <Field  type='username' name='username' placeholder='Username' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
 
          
          {touched.password && errors.password && <p>{errors.password}</p>}
@@ -60,7 +58,11 @@ const UserDetails = ({errors, touched, status})=> {
             <Field type='name' name='lname' placeholder='Last Name' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
 
  
-            
+         <div>
+            <Container>
+               <Link to='/login' >Already have an account? Login instead</Link>
+            </Container>
+         </div> 
          
          
          
@@ -75,6 +77,8 @@ const UserDetails = ({errors, touched, status})=> {
          ))}
      </SomeForm>
       </Form>
+
+      
       
       </>
       
@@ -108,4 +112,4 @@ handleSubmit:(values ,{setStatus}) =>{
      console.log(error);
    });
 }
-})(UserDetails);//Axios some styling changes
+})(UserSignup);//Axios some styling changes
