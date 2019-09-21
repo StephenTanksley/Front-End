@@ -7,7 +7,6 @@ import {NewPostCard} from './NewPostCard'
 import TextField from '@material-ui/core/TextField';
 import App from "../../src/App.css"
 
-
 //Creating the logic for a new post to be published.
 
 // Need to determine the method for generating a user token and setting the token to local storage.css
