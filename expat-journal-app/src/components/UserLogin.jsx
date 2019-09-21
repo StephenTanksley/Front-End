@@ -106,4 +106,4 @@ handleSubmit:(values ,{setStatus}) =>{
      console.log(error);
    });
 }
-})(UserDetails);//Axios
+})(UserDetails); //Axios
