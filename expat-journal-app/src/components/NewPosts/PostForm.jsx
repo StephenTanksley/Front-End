@@ -5,6 +5,8 @@ import axios from 'axios'
 import { FormContainer, Header, Container } from './Components/Styled'
 
 
+//This component accepts user input. 
+
 const PostForm = ({ errors, touched, status }) => {
 
     console.log(status)
@@ -24,7 +26,9 @@ const PostForm = ({ errors, touched, status }) => {
         <FormContainer>  
           <Form>
 
-            {/* Need something in here for the img. Collaborate with Tim on this. */}
+            {/* Need something in here for the img. Collaborate with Tim on this.
+            
+            <img src={errors.url}*/}
 
             {touched.name && errors.name && <p className='error'>{errors.name}</p>}
             <Field type="text" name="name" placeholder="Name" /><br /><br />

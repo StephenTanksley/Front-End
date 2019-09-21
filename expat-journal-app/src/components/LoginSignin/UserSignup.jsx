@@ -3,10 +3,9 @@ import { withFormik, Form, Field, } from 'formik';
 import axios from "axios";
 import * as yup from 'yup';
 import styled from 'styled-components'
-import TextField from '@material-ui/core/TextField';
-import App from "../../src/App.css"
-import { Input } from '@material-ui/core';
-
+import {Container} from '../Styles/Styles'
+import {Link} from 'react-router-dom'
+import UserLogin from './UserLogin'
 
 
 
@@ -20,7 +19,7 @@ const SomeForm = styled.div`
   `;
 
 
-const UserDetails = ({errors, touched, status})=> {
+const UserSignup = ({errors, touched, status})=> {
    
 
       const [names, setNames] = useState([]);
@@ -30,6 +29,7 @@ const UserDetails = ({errors, touched, status})=> {
           setNames([...names, status]);
         }
       }, [status]);
+
    return (
       <>
       
@@ -37,18 +37,15 @@ const UserDetails = ({errors, touched, status})=> {
       <Form>
       
        <SomeForm>
-         {touched.username && errors.username &&<p>{errors.userName}</p>}
+         {touched.username && errors.username &&<p>{errors.username}</p>}
          
-        <Field  type='username' name='username' placeholder='UserName' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
-         
-         
+        <Field  type='username' name='username' placeholder='Username' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
 
          
          {touched.password && errors.password && <p>{errors.password}</p>}
          <Field type='password' name='password' placeholder ='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
-       
-        
+   
          
          {touched.email && errors.email &&<p>{errors.email}</p>}
          <Field type="email" name='email' placeholder ='Email' autoFocus   style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
@@ -58,13 +55,17 @@ const UserDetails = ({errors, touched, status})=> {
          
            {touched.lname && errors.lname &&<p>{errors.lname}</p>}
             <Field type='name' name='lname' placeholder='Last Name' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
-
  
-            
+         <div>
+            <Container>
+               <Link to='/login' >Already have an account? Login instead</Link>
+            </Container>
+         </div> 
          
+         <button type='submit' style={{width:70, height: 30, borderRadius: 35}}>Sign Up</button>
+       
+         {/* //Used just to see items which had been input into fields.  
          
-         
-         <button type='submit' style={{width:70, height: 30, borderRadius: 35}} >Submit</button>
          {names.map(name =>(
             <>
          <p>Username: {name.username}</p>
@@ -72,9 +73,12 @@ const UserDetails = ({errors, touched, status})=> {
          <p>Email: {name.email}</p>
          
             </>
-         ))}
-     </SomeForm>
+         ))} */}
+ 
+         </SomeForm>
       </Form>
+
+      
       
       </>
       
@@ -83,29 +87,31 @@ const UserDetails = ({errors, touched, status})=> {
 
 export default withFormik({mapPropsToValues: values =>{
    return{
-      username: values.username || "",
+      username: values.username || "", //default values
       password: values.password || "",
       email: values.email || "",
-      fname: values.fname || "",//default values
-      lname: values.lname || "",
+      fname: values.fname || "",
+      lname: values.lname || ""
 
 
-   };
-},validationSchema: yup.object().shape({
+   }},
+
+validationSchema: yup.object().shape({
 username: yup.string().required('User name is blank.'),
 password: yup.string().min(6,'Password is not long enough').required('Password is blank'),
 email: yup.string().email().required('Email is blank'),
 fname: yup.string().required('First name is blank'),
 lname: yup.string().required('Last name is blank')//validation for login
 }),
-handleSubmit:(values ,{setStatus}) =>{
+handleSubmit:(values, {setStatus}) =>{
    axios
-   .post("https://reqres.in/api/user", values)
+   .post("https://be-expat-journal.herokuapp.com/api/auth/register", values)
    .then(response => {
      setStatus(response.data);
+     console.log(response)
    })
    .catch(error => {
      console.log(error);
    });
 }
-})(UserDetails);//Axios some styling changes
+})(UserSignup); //Axios some styling changes
