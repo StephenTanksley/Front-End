@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField';
 import App from "../../src/App.css"
+import { Input } from '@material-ui/core';
 
 
 
@@ -14,7 +15,8 @@ const SomeForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color:red;
+  color:gray;
+  font-size: .7em;
   `;
 
 
@@ -37,32 +39,32 @@ const UserDetails = ({errors, touched, status})=> {
        <SomeForm>
          {touched.username && errors.username &&<p>{errors.userName}</p>}
          
-        <Field  type='username' name='username' placeholder='UserName' autoFocus/>
+        <Field  type='username' name='username' placeholder='UserName' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
          
          
 
          
          {touched.password && errors.password && <p>{errors.password}</p>}
-         <Field type='password' name='password' placeholder ='Password'/>
+         <Field type='password' name='password' placeholder ='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
        
         
          
          {touched.email && errors.email &&<p>{errors.email}</p>}
-         <Field type="email" name='email' placeholder ='Email'/>
+         <Field type="email" name='email' placeholder ='Email' autoFocus   style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
         
          {touched.fname && errors.fname &&<p>{errors.fname}</p>}
-            <Field type='name' name='fname' placeholder='First Name'/>
+            <Field type='name' name='fname' placeholder='First Name' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
            {touched.lname && errors.lname &&<p>{errors.lname}</p>}
-            <Field type='name' name='lname' placeholder='Last Name'/>
+            <Field type='name' name='lname' placeholder='Last Name' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
 
  
             
          
          
          
-         <button type='submit'>Submit</button>
+         <button type='submit' style={{width:70, height: 30, borderRadius: 35}} >Submit</button>
          {names.map(name =>(
             <>
          <p>Username: {name.username}</p>
@@ -106,4 +108,4 @@ handleSubmit:(values ,{setStatus}) =>{
      console.log(error);
    });
 }
-})(UserDetails); //Axios
+})(UserDetails);//Axios some styling changes
