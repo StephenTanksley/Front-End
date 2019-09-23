@@ -33,3 +33,11 @@ export const Card = styled.div`
         box-shadow: .9rem .9rem .9rem #52a934;
     }
 `;
+
+export const SomeForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: gray;
+  font-size: 0.7em;
+`;

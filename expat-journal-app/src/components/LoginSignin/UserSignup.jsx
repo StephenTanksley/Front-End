@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withFormik, Form, Field } from "formik";
-import axios from "axios";
 import * as yup from "yup";
-import styled from "styled-components";
+import { SomeForm } from '../Styles/Styles'
 import { Container } from "../Styles/Styles";
 import { Link } from "react-router-dom";
-
-const SomeForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: gray;
-  font-size: 0.7em;
-`;
+import { axiosWithoutAuth as axios } from '../axiosutil'
 
 const UserSignup = ({ errors, touched, status,isSubmitting }) => {
   const [names, setNames] = useState([]);
@@ -29,24 +21,6 @@ const UserSignup = ({ errors, touched, status,isSubmitting }) => {
         <SomeForm>
           {touched.username && errors.username && <p>{errors.username}</p>}
 
-<<<<<<< HEAD
-         
-         {touched.password && errors.password && <p>{errors.password}</p>}
-         <Field type='new-password' name='password' placeholder ='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
-         
-   
-         
-         {touched.email && errors.email &&<p>{errors.email}</p>}
-         <Field type="email" name='email' placeholder ='Email' autoFocus   style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
-        
-         {touched.fname && errors.fname &&<p>{errors.fname}</p>}
-            <Field type='name' name='fname' placeholder='First Name' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
-         
-           {touched.lname && errors.lname &&<p>{errors.lname}</p>}
-            <Field type='name' name='lname' placeholder='Last Name' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
- 
-         <div>
-=======
           <Field
             type="username"
             name="username"
@@ -58,6 +32,7 @@ const UserSignup = ({ errors, touched, status,isSubmitting }) => {
           {touched.password && errors.password && <p>{errors.password}</p>}
           <Field
             type="password"
+            autocomplete="new-password"
             name="password"
             placeholder="Password"
             
@@ -89,7 +64,6 @@ const UserSignup = ({ errors, touched, status,isSubmitting }) => {
           />
 
           <div>
->>>>>>> 043ac63c48ca0a6f9ee1f5f06c8e4522e96805a4
             <Container>
               <Link to="/login">Already have an account? Login instead</Link>
             </Container>
@@ -114,16 +88,6 @@ const UserSignup = ({ errors, touched, status,isSubmitting }) => {
          ))} */}
         </SomeForm>
       </Form>
-<<<<<<< HEAD
-      
-      </>
-      
-   )
-}
-
-export default withFormik({mapPropsToValues: values =>{
-   return{
-=======
     </>
   );
 };
@@ -131,7 +95,6 @@ export default withFormik({mapPropsToValues: values =>{
 export default withFormik({
   mapPropsToValues: values => {
     return {
->>>>>>> 043ac63c48ca0a6f9ee1f5f06c8e4522e96805a4
       username: values.username || "", //default values
       password: values.password || "",
       email: values.email || "",
@@ -154,8 +117,8 @@ export default withFormik({
     lname: yup.string().required("Last name is blank") //validation for login
   }),
   handleSubmit: (values, { setStatus, setError,  }) => {
-    axios
-      .post("https://be-expat-journal.herokuapp.com/api/auth/register", values)
+    axios()
+      .post("/auth/register", values)
       .then(response => {
         setStatus(response.data);
         console.log(response);
