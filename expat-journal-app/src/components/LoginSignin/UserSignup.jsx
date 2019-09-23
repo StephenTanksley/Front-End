@@ -43,7 +43,7 @@ const UserSignup = ({errors, touched, status})=> {
 
          
          {touched.password && errors.password && <p>{errors.password}</p>}
-         <Field type='password' name='password' placeholder ='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
+         <Field type='new-password' name='password' placeholder ='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
    
          
@@ -77,8 +77,6 @@ const UserSignup = ({errors, touched, status})=> {
  
          </SomeForm>
       </Form>
-
-      
       
       </>
       

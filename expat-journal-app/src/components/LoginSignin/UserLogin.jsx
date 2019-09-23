@@ -35,7 +35,7 @@ const UserLogin = ({touched, errors, status, values}) =>{
          {touched.username && errors.username &&<p> Please fill out all fields.{/*errors.username*/}</p>}
          <Field type='login' name='username' placeholder='Username' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}}/>
          {touched.password && errors.password && <p>{errors.password}</p>}
-         <Field type='password' name='password' placeholder='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
+         <Field type='current-password' name='password' placeholder='Password' autoFocus style={{width: 130, height: 40, fontSize: 20, borderRadius: 5}} />
          
          <div>
             <Container>
