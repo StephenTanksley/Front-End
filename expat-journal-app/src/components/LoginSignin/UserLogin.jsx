@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Form, Field, withFormik } from "formik";
 import * as yup from "yup";
-import styled from "styled-components";
+import { SomeForm } from '../Styles/Styles'
 import { Link } from "react-router-dom";
 import { Container } from "../Styles/Styles";
+import { axiosWithoutAuth as axios } from '../axiosutil'
 
-const SomeForms = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: gray;
-  font-size: 0.7rem;
-`;
+
 
 const UserLogin = ({ touched, errors, status , isSubmitting }) => {
   const [name, setName] = useState([]);
@@ -26,13 +20,14 @@ const UserLogin = ({ touched, errors, status , isSubmitting }) => {
   console.log("Name", name);
   console.log("Touched", touched);
   console.log("Errors", errors);
+
   return (
     <>
       <Form>
-        <SomeForms>
+        <SomeForm>
           {touched.username && errors.username && <p> {errors.username}</p>}
           <Field
-            type="login"
+            type="text"
             name="username"
             placeholder="Username"
           
@@ -41,6 +36,7 @@ const UserLogin = ({ touched, errors, status , isSubmitting }) => {
           {touched.password && errors.password && <p>{errors.password}</p>}
           <Field
             type="password"
+            autocomplete="current-password"
             name="password"
             placeholder="Password"
            
@@ -52,19 +48,22 @@ const UserLogin = ({ touched, errors, status , isSubmitting }) => {
               <Link to="/">Don't have an account? Sign up instead</Link>
             </Container>
           </div>
-        </SomeForms>
+        </SomeForm>
 
         <Container>
           <button 
             type="login"
+
             style={{ width: 70, height: 30, borderRadius: 35 }} disabled={isSubmitting}
           >
             Login
           </button>
         </Container>
+
         {/* {usernames.map(name =>(
          {name.username}
          ))} */}
+      
       </Form>
     </>
   );
@@ -82,8 +81,8 @@ export default withFormik({
     password: yup.string().required("Password is required")
   }),
   handleSubmit: (value, { resetForm, setErrors, setStatus, setSubmitting }) => {
-    axios
-      .post("https://be-expat-journal.herokuapp.com/api/auth/login", value)
+    axios()
+      .post("/auth/login", value)
       .then(response => {
         setStatus(response.data);
         resetForm();

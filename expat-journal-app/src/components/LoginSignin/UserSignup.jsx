@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withFormik, Form, Field } from "formik";
-import axios from "axios";
 import * as yup from "yup";
-import styled from "styled-components";
+import { SomeForm } from '../Styles/Styles'
 import { Container } from "../Styles/Styles";
 import { Link } from "react-router-dom";
-
-const SomeForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: gray;
-  font-size: 0.7em;
-`;
+import { axiosWithoutAuth as axios } from '../axiosutil'
 
 const UserSignup = ({ errors, touched, status,isSubmitting }) => {
   const [names, setNames] = useState([]);
@@ -40,6 +32,7 @@ const UserSignup = ({ errors, touched, status,isSubmitting }) => {
           {touched.password && errors.password && <p>{errors.password}</p>}
           <Field
             type="password"
+            autocomplete="new-password"
             name="password"
             placeholder="Password"
             
@@ -124,8 +117,8 @@ export default withFormik({
     lname: yup.string().required("Last name is blank") //validation for login
   }),
   handleSubmit: (values, { setStatus, setError,  }) => {
-    axios
-      .post("https://be-expat-journal.herokuapp.com/api/auth/register", values)
+    axios()
+      .post("/auth/register", values)
       .then(response => {
         setStatus(response.data);
         console.log(response);
