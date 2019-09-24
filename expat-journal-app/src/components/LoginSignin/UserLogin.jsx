@@ -2,25 +2,30 @@ import React, { useState, useEffect } from "react";
 import { Form, Field, withFormik } from "formik";
 import * as yup from "yup";
 import { SomeForm } from '../Styles/Styles'
-import { Link, Redirect, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container } from "../Styles/Styles";
 import { axiosWithoutAuth as axios } from '../axiosutil'
 
 
 
-const UserLogin = ({ touched, errors, status , isSubmitting, Route }) => {
-  const [name, setName] = useState([]);
-
+const UserLogin = (  { touched, errors, isSubmitting, history, status}) => {
+  const [users, setUsers] = useState([]);
+  const forwardUser =() =>{
+    (history.push('/dashboard'))
+  };
+  console.log(history.push)
   useEffect(() => {
     if (status) {
-      setName([...name, status]);
+      setUsers([...users, status]);
+      forwardUser();
     }
   }, [status]);
+  // console.log(props);
 
-  console.log("Name", name);
-  // console.log("Touched", touched);
-  console.log("Errors", errors);
-
+  
+  console.log("Touched", touched);
+  // console.log("Errors", errors);
+  
   return (
     <>
       <Form>
@@ -45,7 +50,7 @@ const UserLogin = ({ touched, errors, status , isSubmitting, Route }) => {
 
           <div>
             <Container>
-              <Link to="/">Don't have an account? Sign up instead</Link>
+            <Link to="/">Don't have an account? Sign up instead</Link>
             </Container>
           </div>
         </SomeForm>
@@ -54,7 +59,7 @@ const UserLogin = ({ touched, errors, status , isSubmitting, Route }) => {
           <button 
             type="login"
 
-            style={{ width: 70, height: 30, borderRadius: 35 }} disabled={isSubmitting}
+            style={{ width: 70, height: 30, borderRadius: 35 }} disabled={isSubmitting} action="/dashboard"
           >
             Login
           </button>
@@ -86,18 +91,18 @@ export default withFormik({
       .required("Password is required")
   }),
 
-  handleSubmit: (value, { resetForm, setErrors, setStatus, setSubmitting }) => {
+  handleSubmit: (value, { resetForm, setErrors, setStatus, setSubmitting}) => {
     axios()
       .post("/auth/login", value)
       .then(response => {
         setStatus(response.data);
         resetForm();
         setSubmitting(false);
-
         localStorage.setItem('token', response.data.token);
+        
         console.log(value)
-        // value.history.push('/dashboard'); ---- > We need to figure out why this is not working.
-        // console.log(value.history);
+        // history.push('/dashboard');
+        
       })
       .catch(error => {
         console.log(error.response);

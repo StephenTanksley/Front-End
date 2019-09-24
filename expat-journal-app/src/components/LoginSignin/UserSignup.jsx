@@ -6,12 +6,15 @@ import { Container } from "../Styles/Styles";
 import { Link } from "react-router-dom";
 import { axiosWithoutAuth as axios } from '../axiosutil'
 
-const UserSignup = ({ errors, touched, status,isSubmitting }) => {
+const UserSignup = ({ errors, touched, status,isSubmitting,history }) => {
   const [names, setNames] = useState([]);
-
+  const forwardSignUp = ()=>{
+    history.push('/dashboard')
+  }
   useEffect(() => {
     if (status) {
       setNames([...names, status]);
+      forwardSignUp();
     }
   }, [status]);
 
