@@ -6,11 +6,8 @@ import { Link, Redirect, Route } from "react-router-dom";
 import { Container } from "../Styles/Styles";
 import { axiosWithoutAuth as axios } from '../axiosutil'
 
-
-
-const UserLogin = ({ touched, errors, status , isSubmitting, Route }) => {
+const UserLogin = ({ touched, errors, status, isSubmitting }) => {
   const [name, setName] = useState([]);
-
   useEffect(() => {
     if (status) {
       setName([...name, status]);
@@ -76,7 +73,7 @@ export default withFormik({
       password: value.password || ""
     };
   },
-  
+
   validationSchema: yup.object().shape({
     username: yup
       .string()
