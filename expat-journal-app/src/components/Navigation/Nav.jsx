@@ -1,26 +1,29 @@
 import React from "react";
-import {NavContainer, NavItem} from './Styles/Styles'
+import {NavContainer, NavItem} from '../Styles/Styles'
 
 
 const Nav = () => {
 
 return(
     <NavContainer>
-        <div className="home">
+
+        {/* <div className="home">
             <NavItem exact to={`/`}>Home</NavItem>
-        </div>
+        </div> */}
+
         <div className="sign-up">
-            <NavItem to='episode-list'>Episodes</NavItem>
+            <NavItem exact to={`/`}>Sign Up</NavItem>
         </div>
+
         <div className="login">
-            <NavItem to='character-list'>Characters</NavItem>
-        </div>
-        <div className="portal right">
-            <NavItem to='locations-list'>Locations</NavItem>
+            <NavItem to='login'>Login</NavItem>
         </div>
 
+        <div className="dashboard">
+            <NavItem to='dashboard'>Dashboard</NavItem>
+        </div>
+        
     </NavContainer>
-
     )
 };
 

@@ -3,14 +3,23 @@ import {Route} from 'react-router-dom'
 import './App.css';
 import UserSignup from './components/LoginSignin/UserSignup';
 import UserLogin from './components/LoginSignin/UserLogin';
+import Nav from '../src/components/Navigation/Nav'
+import Dashboard from './components/NewPosts/Dashboard';
+
 
 function App() {
   return (
     <>
     {/* <UserLogin/> */}
 
+    <Nav />
+
     <Route 
-          path='/' 
+          path='/dashboard'
+          render={(props) => <Dashboard {...props} />} />
+
+    <Route 
+          path='/'
           exact
           render={(props) => <UserSignup {...props} />} />
 

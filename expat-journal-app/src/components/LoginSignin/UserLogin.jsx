@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Form, Field, withFormik } from "formik";
 import * as yup from "yup";
 import { SomeForm } from '../Styles/Styles'
-import { Link } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import { Container } from "../Styles/Styles";
 import { axiosWithoutAuth as axios } from '../axiosutil'
 
 
 
-const UserLogin = ({ touched, errors, status , isSubmitting }) => {
+const UserLogin = ({ touched, errors, status , isSubmitting, Route }) => {
   const [name, setName] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const UserLogin = ({ touched, errors, status , isSubmitting }) => {
   }, [status]);
 
   console.log("Name", name);
-  console.log("Touched", touched);
+  // console.log("Touched", touched);
   console.log("Errors", errors);
 
   return (
@@ -36,7 +36,7 @@ const UserLogin = ({ touched, errors, status , isSubmitting }) => {
           {touched.password && errors.password && <p>{errors.password}</p>}
           <Field
             type="password"
-            autocomplete="current-password"
+            autoComplete="current-password"
             name="password"
             placeholder="Password"
            
@@ -76,10 +76,16 @@ export default withFormik({
       password: value.password || ""
     };
   },
+  
   validationSchema: yup.object().shape({
-    username: yup.string().required("Username is required"),
-    password: yup.string().required("Password is required")
+    username: yup
+      .string()
+      .required("Username is required"),
+    password: yup
+      .string()
+      .required("Password is required")
   }),
+
   handleSubmit: (value, { resetForm, setErrors, setStatus, setSubmitting }) => {
     axios()
       .post("/auth/login", value)
@@ -87,12 +93,15 @@ export default withFormik({
         setStatus(response.data);
         resetForm();
         setSubmitting(false);
-        console.log(response.data);
+
+        localStorage.setItem('token', response.data.token);
+        console.log(value)
+        // value.history.push('/dashboard'); ---- > We need to figure out why this is not working.
+        // console.log(value.history);
       })
       .catch(error => {
         console.log(error.response);
         setErrors("User not found")
-        
       });
   }
 })(UserLogin);
