@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Container} from '../Styles/Styles'
-import NewPostCard from './NewPostCard'
-import PostForm from './PostForm'
+import NewPostCard from '../NewPosts/NewPostCard'
+import PostForm from '../NewPosts/PostForm'
 
 //Creating the logic for a new post to be published.
 
@@ -22,7 +22,7 @@ return (
         {/*Where you input information to create a new card.*/}
 
  
-        {/* <NewPostCard /> */}
+        <NewPostCard />
         {/*Form map contained below. This will map through existing data in posts and display it using cards. This is what creates our grid.*/}
          {/* <Container>
            {posts.map((item, index) => {
