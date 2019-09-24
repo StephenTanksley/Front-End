@@ -9,16 +9,18 @@ import {CardImg, CardBody,
 
 const NewPostCard = (props) => {
   const entry = props.item
+  console.log(entry)
   return (
     <Card>
       <CardBody>
         {/* <CardImg src={user_supplied.image} alt={user_supplied.description} /> This is placeholder! */}
         {/* This is going to be taken from the user object. */}
        
-        {/* <CardTitle><h3>{entry.name}</h3></CardTitle><br /> 
+        {/* <CardTitle><h3>{entry.name}</h3></CardTitle><br />  */}
         <CardSubtitle><h4>Date: {entry.date}</h4></CardSubtitle>
         <h5>Location (country, city): {entry.location}</h5><br />
-        <h5>{entry.description}</h5> */}
+        <h5>{entry.description}</h5>
+        
         <img src="https://placekitten.com/350/350" alt="an adorable cat from Istanbul" />
         <CardTitle><h3>Stan Stanleyson</h3></CardTitle>
         <CardSubtitle><h4>Date: 05/15/2015</h4></CardSubtitle>

@@ -10,7 +10,12 @@ import { Container } from '../Styles/Styles'
 const PostForm = ({ errors, touched, status }) => {
 
   console.log(status)
-  const [entry, setEntry] = useState([])
+  const [entry, setEntry] = useState({
+    id: null,  
+    date: '',
+    location: '',
+    description: ''
+  })
 
   useEffect(() => {
       if(status) {
@@ -29,12 +34,18 @@ const PostForm = ({ errors, touched, status }) => {
 
             {touched.date && errors.date && <p className='error'>{errors.date}</p>}
             <Field type="text" name="date" placeholder="Date" /><br /><br />
+            {console.log(errors.date)}
+
 
             {touched.location && errors.location && <p className='error'>{errors.location}</p>}
             <Field type="text" name="location" placeholder="Location (country, city)" /><br /><br />
+            {console.log(errors.location)}
+
 
             {touched.description && errors.description && <p className='error'>{errors.description}</p>}
             <Field type="text" name="description" placeholder="Description" />
+            {console.log(errors.description)}
+
 
             <button type="submit" name="submit">Submit</button>
             </Form>
@@ -43,41 +54,44 @@ const PostForm = ({ errors, touched, status }) => {
   )}
 
 
-// export default FormikPostForm = withFormik({
-//   mapPropsToValues({ /*image,*/ name, date, location, description }) {
-//     return {
-//       name: name || "",
-//       date: date || "",
-//       location: location || "",
-//       description: description || ""
-//     };
-//   },
+export default withFormik({
+  mapPropsToValues: value => {
+    return {
+      name: value.name || "",
+      date: value.date || "",
+      location: value.location || "",
+      description: value.description || ""
+    };
+  },
 
-//   validationSchema: yup.object().shape({
-//     date: yup
-//       .string()
-//       .required("What date did you begin your adventure?"),
-//     location: yup
-//       .string()
-//       .required("Where did you go? Country/city"),
-//     description: yup
-//       .string()
-//       // .max(limit: 3000)
-//       .required("Tell us about what you did and what it was like")
-//   }),
+  validationSchema: yup.object().shape({
+    date: yup
+      .string()
+      .required("What date did you begin your adventure?"),
+    location: yup
+      .string()
+      .required("Where did you go? Country/city"),
+    description: yup
+      .string()
+      // .max(limit: 3000)
+      .required("Tell us about what you did and what it was like")
+  }),
 
-//   handleSubmit: (values, { setStatus, setError }) => {
-//     axios()
-//     .post('', values)
-//     .then(response => {
-//       setStatus(response.data);
-//       console.log(response)
-//     })
-//     .catch(error => {
-//       console.log(error)
-//       setError({error})
-//     })
-//     //THIS IS WHERE YOU DO YOUR FORM SUBMISSION CODE... HTTP REQUESTS, ETC.
-//     //NEED CODE FOR PROTECTED ENDPOINTS MAPPED TO EACH USER.
-//   }
-// })(PostForm);
+  handleSubmit: (value, { resetForm, setStatus, setError, setSubmitting }) => {
+    axios()
+    .post('https://reqres.in/api/', value)
+    .then(response => {
+      setStatus(response.data);
+      resetForm();
+      setSubmitting(false);
+      console.log(value)
+    })
+    .catch(error => {
+      console.log(error)
+      setError({error})
+    })
+    //THIS IS WHERE YOU DO YOUR FORM SUBMISSION CODE... HTTP REQUESTS, ETC.
+    //NEED CODE FOR PROTECTED ENDPOINTS MAPPED TO EACH USER.
+  }
+})(PostForm);
+

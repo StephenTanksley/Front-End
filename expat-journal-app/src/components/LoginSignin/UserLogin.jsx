@@ -50,7 +50,6 @@ const UserLogin = ({ touched, errors, status, isSubmitting }) => {
         <Container>
           <button 
             type="login"
-
             style={{ width: 70, height: 30, borderRadius: 35 }} disabled={isSubmitting}
           >
             Login
