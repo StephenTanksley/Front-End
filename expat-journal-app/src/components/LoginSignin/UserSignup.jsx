@@ -32,7 +32,7 @@ const UserSignup = ({ errors, touched, status,isSubmitting }) => {
           {touched.password && errors.password && <p>{errors.password}</p>}
           <Field
             type="password"
-            autocomplete="new-password"
+            autoComplete="new-password"
             name="password"
             placeholder="Password"
             
