@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
+import {CardImg} from 'reactstrap'
 
 export const Container = styled.div`
     display: flex;
@@ -14,20 +15,20 @@ export const Container = styled.div`
 export const Card = styled.div`
 
     font-size: 62.5%;
-    font-size: 1.3rem;
-    line-height: 2rem;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
     color: black;
     display: flex;
     flex-direction: column;
-    width: 30%;
-    text-align: center;
+    width: 20%;
     justify-content: space-between;
     align-items: center;
     border: .2rem solid white
-    margin: 1rem;
+    margin: 1.3rem;
     border: .2rem solid gray;
     border-radius: .5rem;
-    padding: 1.5rem;
+    padding: .5rem;
+    padding-top: 1rem;
     background-color: white;
 
     :hover{
@@ -71,3 +72,7 @@ export const NavItem = styled(NavLink)`
         color: lightgray;
     }
 `;
+
+export const Photo = styled(CardImg)`
+    border-radius: .5rem;
+`

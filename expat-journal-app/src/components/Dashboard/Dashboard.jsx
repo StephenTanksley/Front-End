@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Container } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
-import JournalPost from '../NewPosts/JournalPost' 
+import JournalForm from '../NewPosts/JournalForm' 
 
 
 const Dashboard = () => {
     const [journal, setJournal] = useState([]);
+    console.log(journal)
 
     useEffect(() => {
         if (journal.length === 0){
@@ -23,27 +24,23 @@ const Dashboard = () => {
         }}, [journal])
 
         return (
-
+ 
         <div>
-            
+
             <Container>
                 <h1>My Adventures</h1>
             </Container>
 
-            <JournalPost journal={journal} setJournal={setJournal}/>
-            {/*Where you input information to create a new card.*/}
+            <JournalForm journal={journal} setJournal={setJournal}/>
+            {/*This is the form where you input information to create a new card.*/}
 
-    
-            <NewJournal />
-            {/*Form map contained below. This will map through existing data in posts and display it using cards. This is what creates our grid.*/}
-            {/* <Container>
-            {posts.map((item, index) => {
-                    return (
-                    <NewPostCard 
-                        item = {item}
-                        key = {index} />
-                    )})}
-            </Container> */}
+            {journal.map((item, index) => {
+                return(
+                    <NewJournal
+                        item={item}
+                        key={index} />
+                )})}
+
 
             </div>
 
