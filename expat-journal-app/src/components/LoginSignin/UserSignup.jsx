@@ -9,7 +9,7 @@ import { axiosWithoutAuth as axios } from '../axiosutil'
 const UserSignup = ({ errors, touched, status,isSubmitting,history }) => {
   const [names, setNames] = useState([]);
   const forwardSignUp = ()=>{
-    history.push('/dashboard')
+    history.push('/')
   }
   useEffect(() => {
     if (status) {
