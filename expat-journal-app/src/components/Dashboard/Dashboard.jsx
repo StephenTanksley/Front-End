@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Container } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
 import JournalForm from '../NewPosts/JournalForm' 
+import PictureList from '../PictureList/PictureList';
 
 
 const Dashboard = () => {
@@ -41,7 +42,7 @@ const Dashboard = () => {
                         key={index} />
                 )})}
 
-
+                <PictureList/>
             </div>
 
 

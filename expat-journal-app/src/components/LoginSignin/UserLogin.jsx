@@ -11,7 +11,7 @@ import { axiosWithoutAuth as axios } from '../axiosutil'
 const UserLogin = (  { touched, errors, isSubmitting, history, status}) => {
   const [users, setUsers] = useState([]);
   const forwardUser =() =>{
-    (history.push('/dashboard'))
+    (history.push('/'))
   };
   // console.log(history.push)
   useEffect(() => {
