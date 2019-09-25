@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Container } from '../Styles/Styles'
 
 
 //This component accepts user input. 
 
-const PostForm = () => {
+const JournalPost = ({journal, setJournal}) => {
   const [formValues, setFormValues] = useState({
-    id: null,
+    id: Date.now(),
     name: "",
     location: "",
     date: "",
     description: ""
   })
 
-  function handleChange({target: {name, value}}) {
-    setFormValues({...formValues, [name]: value})
+  function handleChange({ target: {name, value}}) {
+    setFormValues({ ...formValues, [name]: value})
   }
 
   function handleSubmit(e) { 
     e.preventDefault();
+    setFormValues(state =>({...state, id: Date.now()}))
+    setJournal([ ...journal, formValues])
     console.log(formValues);
   }
 
@@ -30,7 +31,6 @@ const PostForm = () => {
             <label>Name: </label>
             <input name="name" value={formValues.name} onChange={handleChange} />
 
-
           </form>
         </Container>
       </div>
@@ -38,4 +38,4 @@ const PostForm = () => {
 
 
 
-export default PostForm
+export default JournalPost

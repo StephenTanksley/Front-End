@@ -7,9 +7,8 @@ import {CardImg, CardBody,
 // This component displays the elements of a user's post. This entirely presentational.
 // There is no logic in this card at all. Just formatting the data provided by a user.
 
-const NewPostCard = (props) => {
+const NewJournal = (props) => {
   const entry = props.item
-  console.log(entry)
   return (
     <Card>
       <CardBody>
@@ -19,8 +18,6 @@ const NewPostCard = (props) => {
         <CardSubtitle><h4>Date: 05/15/2015</h4></CardSubtitle>
         <h5>Location (city, country): Istanbul, Turkey</h5>
         <h5>"This is a picture of one of the many cats I saw in my trip to Istanbul. It was super cute and I was drinking blahblahblh"</h5>
-
-
 
 
         {/* <CardImg src={user_supplied.image} alt={user_supplied.description} /> This is placeholder! */}
@@ -37,4 +34,4 @@ const NewPostCard = (props) => {
     </Card>
   )
 }
-export default NewPostCard;
+export default NewJournal;

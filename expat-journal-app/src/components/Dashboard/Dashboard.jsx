@@ -1,40 +1,57 @@
-import React, {useEffect, useState} from 'react';
-import {Container} from '../Styles/Styles'
-import NewPostCard from '../NewPosts/NewPostCard'
-import PostForm from '../NewPosts/PostForm'
+import React, {useState, useEffect} from 'react'
+import { Container } from '../Styles/Styles'
+import NewJournal from '../NewPosts/NewJournal'
+import JournalPost from '../NewPosts/JournalPost' 
 
-//Creating the logic for a new post to be published.
-
-// This component takes items in state and renders them into cards to be displayed in a grid.
 
 const Dashboard = () => {
+    const [journal, setJournal] = useState([]);
 
-    const [posts, setPost] = ([])
+    useEffect(() => {
+        if (journal.length === 0){
+            if (localStorage.getItem('journal')){
+                    setJournal(JSON.parse(localStorage.getItem('journal')));
+                }
+            }else {
+                localStorage.setItem('journal', JSON.stringify(journal));
+        }}, [])
 
-return (
-    <div>
-        
-        <Container>
-            <h1>My Adventures</h1>
-        </Container>
+    useEffect(() => {
+        if(localStorage.getItem('journal') && JSON.parse(localStorage.getItem('journal').length !== journal.length))
+        {
+            localStorage.setItem('journal', JSON.stringify(journal));
+        }}, [journal])
 
-        <PostForm />
-        {/*Where you input information to create a new card.*/}
+        return (
 
- 
-        <NewPostCard />
-        {/*Form map contained below. This will map through existing data in posts and display it using cards. This is what creates our grid.*/}
-         {/* <Container>
-           {posts.map((item, index) => {
-                return (
-                <NewPostCard 
-                    item = {item}
-                    key = {index} />
-                )})}
-        </Container> */}
+        <div>
+            
+            <Container>
+                <h1>My Adventures</h1>
+            </Container>
 
-        </div>
-    );
-}
+            <JournalPost journal={journal} setJournal={setJournal}/>
+            {/*Where you input information to create a new card.*/}
+
+    
+            <NewJournal />
+            {/*Form map contained below. This will map through existing data in posts and display it using cards. This is what creates our grid.*/}
+            {/* <Container>
+            {posts.map((item, index) => {
+                    return (
+                    <NewPostCard 
+                        item = {item}
+                        key = {index} />
+                    )})}
+            </Container> */}
+
+            </div>
+
+
+
+
+        )
+
+    }
 
 export default Dashboard;
