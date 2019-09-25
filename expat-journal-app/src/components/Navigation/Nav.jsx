@@ -12,15 +12,15 @@ return(
         </div> */}
 
         <div className="sign-up">
-            <NavItem exact to={`/`}>Sign Up</NavItem>
+            <NavItem to={`/sign-up`}>Sign Up</NavItem>
         </div>
 
         <div className="login">
             <NavItem to='login'>Login</NavItem>
         </div>
 
-        <div className="dashboard">
-            <NavItem to='dashboard'>Dashboard</NavItem>
+        <div className="home">
+            <NavItem exact to='/'>Dashboard</NavItem>
         </div>
         
     </NavContainer>

@@ -13,7 +13,7 @@ const UserLogin = (  { touched, errors, isSubmitting, history, status}) => {
   const forwardUser =() =>{
     (history.push('/dashboard'))
   };
-  console.log(history.push)
+  // console.log(history.push)
   useEffect(() => {
     if (status) {
       setUsers([...users, status]);
@@ -50,7 +50,7 @@ const UserLogin = (  { touched, errors, isSubmitting, history, status}) => {
 
           <div>
             <Container>
-            <Link to="/">Don't have an account? Sign up instead</Link>
+            <Link to="/sign-up">Don't have an account? Sign up instead</Link>
             </Container>
           </div>
         </SomeForm>
@@ -81,7 +81,7 @@ export default withFormik({
       password: value.password || ""
     };
   },
-  
+
   validationSchema: yup.object().shape({
     username: yup
       .string()
