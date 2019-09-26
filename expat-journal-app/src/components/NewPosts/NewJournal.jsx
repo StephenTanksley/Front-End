@@ -1,6 +1,7 @@
 import React from "react";
 import {Card, Photo} from '../Styles/Styles' 
 import {CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import {Link} from 'react-router-dom'
 import {axiosWithAuth as axios} from '../axiosutil'
 
 
@@ -10,17 +11,17 @@ import {axiosWithAuth as axios} from '../axiosutil'
 const NewJournal = (props) => {
   console.log(props);
   const entry = props.item
-  const id = props.item.id
   // console.log(entry);
 
   function handleDelete(e) {
     e.preventDefault();
-    axios()
-      .delete(`/posts/${id}`)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
+    console.log({ target: {name, value}})
+    // axios()
+    //   .delete(`/posts/${id}`)
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(res.data);
+    //   })
   }
 
 
@@ -32,6 +33,7 @@ const NewJournal = (props) => {
   //   e.preventDefault();
   //   setFormValues({ ...formValues, [name]: value})
   //   axios()
+  //    .put('/posts)
   // }
 
   //For the handleEdit function, we're taking in an event. The event is targeting something that has an ID associated with it.
@@ -45,7 +47,10 @@ const NewJournal = (props) => {
         <CardSubtitle><p>Date: {entry.date}</p></CardSubtitle>
         <p>{entry.content}</p> <br />
 
-        <button type="submit" >Edit</button> <button type="submit" onClick={handleDelete} >Delete</button>
+        <button type="submit" onClick={handleEdit}>
+          <Link to={`/edit/${item.id}`} >Edit </Link>
+        </button> 
+        <button type="submit" onClick={handleDelete} >Delete</button>
 
       </CardBody>
     </Card>

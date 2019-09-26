@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import { Container, GridView } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
 import JournalForm from '../NewPosts/JournalForm' 
@@ -38,8 +38,8 @@ const Dashboard = () => {
         </Container>
 
         <Switch>
-            <Route path='/' render={props => <JournalForm picture={picture} setPicture={setPicture} /> } />
-            <Route path='/edit/:id' render={props => <JournalForm picture={picture} setPicture={setPicture} /> } />
+            <Route path='/' render={props => <JournalForm picture={picture} setPicture={setPicture} edit={false} /> } />
+            <Route path='/edit/:id' render={props => <JournalForm picture={picture} setPicture={setPicture} edit={true} /> } />
         </Switch>    
 
             {/*This is the form where you input information to create a new card.*/}
