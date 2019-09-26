@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Route} from 'react-router-dom'
+import {Route , Switch} from 'react-router-dom'
 import { Container, GridView } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
 import JournalForm from '../NewPosts/JournalForm' 
