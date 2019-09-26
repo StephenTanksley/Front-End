@@ -75,4 +75,12 @@ export const NavItem = styled(NavLink)`
 
 export const Photo = styled(CardImg)`
     border-radius: .5rem;
-`
+`;
+
+export const GridView = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly
+    
+    
+  `;

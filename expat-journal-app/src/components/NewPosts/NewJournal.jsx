@@ -16,32 +16,11 @@ const NewJournal = (props) => {
         <Photo src={entry.imageURL} alt="a user supplied image" />
         <CardTitle>Title: {entry.title}</CardTitle><br /> 
         <CardSubtitle><p>Date: {entry.date}</p></CardSubtitle>
-        <p></p>
-        <p>{entry.content}</p>
+        <p>{entry.content}</p> <br />
 
+        <button>Edit</button> <button>Delete</button>
       </CardBody>
     </Card>
   )
 }
 export default NewJournal;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// <img src="https://placekitten.com/350/350" alt="an adorable cat from Istanbul" />
-// <CardTitle><h3>Stan Stanleyson</h3></CardTitle>
-// <CardSubtitle><h4>Date: 05/15/2015</h4></CardSubtitle>
-// <h5>Location (city, country): Istanbul, Turkey</h5>
-// <h5>"This is a picture of one of the many cats I saw in my trip to Istanbul. It was super cute and I was drinking blahblahblh"</h5>

@@ -13,7 +13,7 @@ const JournalForm = () => {
     date: null,
     content: "",
     imageURL: "",
-    user_id: 31
+    user_id: ""
   })
 
   const initialState = {
