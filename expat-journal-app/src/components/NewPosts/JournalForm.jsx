@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container } from '../Styles/Styles'
-import { axiosWithoutAuth as axios } from '../axiosutil';
+import { axiosWithAuth as axios } from '../axiosutil';
 //Keep working without auth, but know that we're putting auth back in.
 
 
@@ -29,6 +29,7 @@ const JournalForm = () => {
   function handleChange({ target: {name, value}}) {
     setFormValues({ ...formValues, [name]: value})
   }
+  
 
   function handleSubmit(e) { 
     e.preventDefault();

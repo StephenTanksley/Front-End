@@ -21,7 +21,7 @@ const Dashboard = () => {
          setPicture(response.data);
          
          console.log(response.data);
-         console.log(response.data.imageUrl)
+        //  console.log(response.data.imageUrl)
        })
        .catch(error => {
          console.log(error);
