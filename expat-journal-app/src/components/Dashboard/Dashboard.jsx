@@ -1,29 +1,33 @@
 import React, {useState, useEffect} from 'react'
-import { Container } from '../Styles/Styles'
+import { Container, GridView } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
 import JournalForm from '../NewPosts/JournalForm' 
-import PictureList from '../PictureList/PictureList';
+import { axiosWithoutAuth as axios} from '../axiosutil';
 
 
 const Dashboard = () => {
-    const [journal, setJournal] = useState([]);
-    console.log(journal)
+    
+    
 
-    useEffect(() => {
-        if (journal.length === 0){
-            if (localStorage.getItem('journal')){
-                    setJournal(JSON.parse(localStorage.getItem('journal')));
-                }
-            }else {
-                localStorage.setItem('journal', JSON.stringify(journal));
-        }}, [])
+    const [picture, setPicture] = useState([]);
 
-    useEffect(() => {
-        if(localStorage.getItem('journal') && JSON.parse(localStorage.getItem('journal').length !== journal.length))
-        {
-            localStorage.setItem('journal', JSON.stringify(journal));
-        }}, [journal])
-
+    const sortedPictures = picture.sort((a,b) => new Date(b.create_at) - new Date(a.created_at))
+       
+ useEffect(() => {
+     
+     axios()
+       .get(`https://be-expat-journal.herokuapp.com/api/posts`)// api goes here
+       .then(response => {
+         setPicture(response.data);
+         
+         console.log(response.data);
+         console.log(response.data.imageUrl)
+       })
+       .catch(error => {
+         console.log(error);
+       });
+   }, []);
+   
         return (
  
         <div>
@@ -31,18 +35,18 @@ const Dashboard = () => {
             <Container>
                 <h1>My Adventures</h1>
             </Container>
-
-            <JournalForm journal={journal} setJournal={setJournal}/>
+            
+            <JournalForm picture={picture} setPicture={setPicture} />
             {/*This is the form where you input information to create a new card.*/}
-
-            {journal.map((item, index) => {
+            <GridView>
+            {sortedPictures.map((item, index) => {
                 return(
                     <NewJournal
                         item={item}
                         key={index} />
                 )})}
-
-                <PictureList/>
+                </GridView>
+                
             </div>
 
 
