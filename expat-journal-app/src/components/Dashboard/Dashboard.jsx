@@ -11,12 +11,12 @@ const Dashboard = () => {
 
     const [picture, setPicture] = useState([]);
 
-    const sortedPictures = picture.sort((a,b) => new Date(b.create_at) - new Date(a.created_at))
+    const sortedPictures = picture.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
        
  useEffect(() => {
      
      axios()
-       .get(`https://be-expat-journal.herokuapp.com/api/posts`)// api goes here
+       .get(`/posts`)// api goes here
        .then(response => {
          setPicture(response.data);
          
