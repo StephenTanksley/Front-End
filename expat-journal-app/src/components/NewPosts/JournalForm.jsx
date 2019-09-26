@@ -24,7 +24,8 @@ const JournalForm = ({journal, setJournal}) => {
     console.log(formValues);
     console.log(journal)
   }
-
+  
+  
   return(
       <div className='new-entry'>
         <Container>
