@@ -28,9 +28,7 @@ const Dashboard = () => {
                         key={index} />
                 )})}
 
-
             </div>
-
 
         )
 
