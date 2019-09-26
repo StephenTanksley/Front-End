@@ -8,8 +8,8 @@ import { axiosWithoutAuth as axios } from '../axiosutil'
 
 const UserSignup = ({ errors, touched, status,isSubmitting,history }) => {
   const [names, setNames] = useState([]);
-  const forwardSignUp = ()=>{
-    history.push('/dashboard')
+  const forwardSignUp = () => {
+    history.push('/')
   }
   useEffect(() => {
     if (status) {
@@ -124,6 +124,7 @@ export default withFormik({
       .post("/auth/register", values)
       .then(response => {
         setStatus(response.data);
+        localStorage.setItem("token", response.data.token)
         console.log(response);
       })
       .catch(error => {

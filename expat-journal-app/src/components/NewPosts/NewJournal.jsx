@@ -1,7 +1,6 @@
 import React from "react";
 import {Card, Photo} from '../Styles/Styles' 
-import {CardImg, CardBody,
-  CardTitle, CardSubtitle} from 'reactstrap';
+import {CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 
 
 // This component displays the elements of a user's post. This entirely presentational.
@@ -10,7 +9,7 @@ import {CardImg, CardBody,
 const NewJournal = (props) => {
   // console.log(props);
   const entry = props.item
-  console.log(entry);
+  // console.log(entry);
   return (
     <Card>
       <CardBody>

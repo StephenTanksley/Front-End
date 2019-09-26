@@ -1,35 +1,22 @@
 import React, {useState, useEffect} from 'react'
-import { Container } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
-import JournalForm from '../NewPosts/JournalForm' 
+import JournalForm from '../NewPosts/JournalForm'
 
-
+//Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
+//Axios call is going to use axiosWithAuth
 const Dashboard = () => {
     const [journal, setJournal] = useState([]);
-    console.log(journal)
+    console.log('journal array from Dashboard', journal)
 
-    useEffect(() => {
-        if (journal.length === 0){
-            if (localStorage.getItem('journal')){
-                    setJournal(JSON.parse(localStorage.getItem('journal')));
-                }
-            }else {
-                localStorage.setItem('journal', JSON.stringify(journal));
-        }}, [])
+    
 
-    useEffect(() => {
-        if(localStorage.getItem('journal') && JSON.parse(localStorage.getItem('journal').length !== journal.length))
-        {
-            localStorage.setItem('journal', JSON.stringify(journal));
-        }}, [journal])
+
+
+
 
         return (
  
         <div>
-
-            <Container>
-                <h1>My Adventures</h1>
-            </Container>
 
             <JournalForm journal={journal} setJournal={setJournal}/>
             {/*This is the form where you input information to create a new card.*/}
@@ -43,8 +30,6 @@ const Dashboard = () => {
 
 
             </div>
-
-
 
 
         )
