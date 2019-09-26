@@ -64,10 +64,6 @@ const UserLogin = (  { touched, errors, isSubmitting, history, status}) => {
             Login
           </button>
         </Container>
-
-        {/* {usernames.map(name =>(
-         {name.username}
-         ))} */}
       
       </Form>
     </>
@@ -99,10 +95,9 @@ export default withFormik({
         resetForm();
         setSubmitting(false);
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user.id))
         
-        console.log(value)
-        // history.push('/dashboard');
-        
+        console.log(value)        
       })
       .catch(error => {
         console.log(error.response);

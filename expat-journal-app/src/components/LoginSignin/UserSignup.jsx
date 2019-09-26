@@ -124,6 +124,8 @@ export default withFormik({
       .post("/auth/register", values)
       .then(response => {
         setStatus(response.data);
+        localStorage.setItem("token", response.data.token)
+        localStorage.setItem('user', JSON.stringify(response.data.user.id))
         console.log(response);
       })
       .catch(error => {

@@ -1,28 +1,53 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Container } from '../Styles/Styles'
+import { axiosWithAuth as axios } from '../axiosutil';
+//Keep working without auth, but know that we're putting auth back in.
 
 
 //This component accepts user input. This is our form.
-
-const JournalForm = ({journal, setJournal}) => {
+const JournalForm = () => {
   const [formValues, setFormValues] = useState({
     title: "",
+    city: "",
+    country: "",
+    date: null,
     content: "",
-    date: null || '',
     imageURL: "",
-    user_id: Date.now()
+    user_id: ""
   })
+
+  const initialState = {
+      title: "",
+      city: "",
+      country: "",
+      date: null,
+      content: "",
+      imageURL: "",
+      user_id: ""
+  }
 
   function handleChange({ target: {name, value}}) {
     setFormValues({ ...formValues, [name]: value})
   }
+  
 
   function handleSubmit(e) { 
     e.preventDefault();
-    setFormValues(state =>({...state, id: Date.now()}))
-    setJournal([ ...journal, formValues])
-    console.log(formValues);
-    console.log(journal)
+    setFormValues(state =>({...state}))
+    console.log(formValues)
+    // setJournal([ ...journal, formValues])
+
+    axios()
+      .post("/posts", formValues)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    setFormValues(initialState)
+    // console.log('current form values', formValues);
   }
   
   
@@ -33,15 +58,18 @@ const JournalForm = ({journal, setJournal}) => {
             
             <input className="input-field" name="title" placeholder="title" value={formValues.name}  onChange={handleChange} />
  
-            <input className="input-field" name="imageURL" placeholder="picture URL" value={formValues.imageURL} onChange={handleChange} /> 
+            <input className="input-field" name="imageURL" placeholder="picture URL" value={formValues.imageURL} onChange={handleChange} /> <br />
 
-            <input className="input-field"name="date" placeholder="date" value={formValues.date} onChange={handleChange} /><br />
+            {/* <input className="input-field"name="date" placeholder="date" value={formValues.date} onChange={handleChange} /><br /> */}
+
+            <input className="input-field"name="city" placeholder="city" value={formValues.city} onChange={handleChange} />
+
+            <input className="input-field"name="country" placeholder="country" value={formValues.country} onChange={handleChange} /> <br />
 
             <input className="input-field description" name="content" placeholder="describe your journey" type="text" size="50" value={formValues.content} onChange={handleChange} />
-
-            <button onClick={handleSubmit}>Share your Story!</button>
-
-{/* Unable to add multiple form values at the same time. */}
+            <Container>
+              <button className="submit-button" type="submit">Share your Story!</button>
+            </Container>
 
           </form>
         </Container>
