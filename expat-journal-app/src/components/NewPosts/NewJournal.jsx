@@ -34,6 +34,9 @@ const NewJournal = (props) => {
   //   axios()
   // }
 
+  //For the handleEdit function, we're taking in an event. The event is targeting something that has an ID associated with it.
+  //We want to pull in that ID
+
   return (
     <Card>
       <CardBody>
