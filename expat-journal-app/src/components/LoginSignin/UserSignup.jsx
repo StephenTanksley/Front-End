@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import * as yup from "yup";
-import { SomeForm } from '../Styles/Styles'
+import { SomeForm } from "../Styles/Styles";
 import { Container } from "../Styles/Styles";
 import { Link } from "react-router-dom";
-import { axiosWithoutAuth as axios } from '../axiosutil'
+import { axiosWithoutAuth as axios } from "../axiosutil";
 
-const UserSignup = ({ errors, touched, status,isSubmitting,history }) => {
+const UserSignup = ({ errors, touched, status, isSubmitting, history }) => {
   const [names, setNames] = useState([]);
-  const forwardSignUp = ()=>{
-    history.push('/')
-  }
+  const forwardSignUp = () => {
+    history.push("/");
+  };
   useEffect(() => {
     if (status) {
       setNames([...names, status]);
@@ -28,7 +28,6 @@ const UserSignup = ({ errors, touched, status,isSubmitting,history }) => {
             type="username"
             name="username"
             placeholder="Username"
-            
             style={{ width: 130, height: 40, fontSize: 20, borderRadius: 5 }}
           />
 
@@ -38,7 +37,6 @@ const UserSignup = ({ errors, touched, status,isSubmitting,history }) => {
             autoComplete="new-password"
             name="password"
             placeholder="Password"
-            
             style={{ width: 130, height: 40, fontSize: 20, borderRadius: 5 }}
           />
 
@@ -74,7 +72,8 @@ const UserSignup = ({ errors, touched, status,isSubmitting,history }) => {
 
           <button
             type="submit"
-            style={{ width: 70, height: 30, borderRadius: 35 }} disabled={isSubmitting}
+            style={{ width: 70, height: 30, borderRadius: 35 }}
+            disabled={isSubmitting}
           >
             Sign Up
           </button>
@@ -119,18 +118,18 @@ export default withFormik({
     fname: yup.string().required("First name is blank"),
     lname: yup.string().required("Last name is blank") //validation for login
   }),
-  handleSubmit: (values, { setStatus, setError,  }) => {
+  handleSubmit: (values, { setStatus, setError }) => {
     axios()
       .post("/auth/register", values)
       .then(response => {
         setStatus(response.data);
-        localStorage.setItem("token", response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.user.id))
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user.id));
         console.log(response);
       })
       .catch(error => {
         console.log(error.response);
-        setError({error})
+        setError({ error });
       });
   }
 })(UserSignup); //Axios some styling changes
