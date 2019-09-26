@@ -1,3 +1,4 @@
+
 import React, {useState, useEffect} from 'react'
 import {Route, Switch} from 'react-router-dom'
 import { Container, GridView } from '../Styles/Styles'
@@ -9,20 +10,21 @@ import { axiosWithoutAuth as axios} from '../axiosutil';
 //Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
 //Axios call is going to use axiosWithAuth
 const Dashboard = () => {
-    
-    const [picture, setPicture] = useState([]);
+  const [picture, setPicture] = useState([]);
 
-    const sortedPictures = picture.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
-       
-    useEffect(() => {
-     
-     axios()
-       .get(`/posts`)// api goes here
-       .then(response => {
-         setPicture(response.data);
-         
-         console.log(response.data);
+  const sortedPictures = picture.sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
+
+  useEffect(() => {
+    axios()
+      .get(`/posts`) // api goes here
+      .then(response => {
+        setPicture(response.data);
+
+        console.log(response.data);
         //  console.log(response.data.imageUrl)
+      
        })
        .catch(error => {
          console.log(error);

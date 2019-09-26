@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react'
 import { Container } from '../Styles/Styles'
 import { axiosWithAuth as axios } from '../axiosutil';
-//Keep working without auth, but know that we're putting auth back in.
 
+//Keep working without auth, but know that we're putting auth back in.
 
 //This component accepts user input. This is our form.
 const JournalForm = (edit, match: {params: {id}}) => {
@@ -14,17 +15,18 @@ const JournalForm = (edit, match: {params: {id}}) => {
     content: "",
     imageURL: "",
     user_id: ""
-  })
+  });
 
   const initialState = {
-      title: "",
-      city: "",
-      country: "",
-      date: null,
-      content: "",
-      imageURL: "",
-      user_id: ""
-  }
+    title: "",
+    city: "",
+    country: "",
+    date: null,
+    content: "",
+    imageURL: "",
+    user_id: ""
+  };
+
 
   useEffect(() => {
     if (edit) {
@@ -51,26 +53,28 @@ const JournalForm = (edit, match: {params: {id}}) => {
  
   function handleChange({ target: {name, value}}) {
     setFormValues({ ...formValues, [name]: value})
-  }
-  
 
-  function handleSubmit(e) { 
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
     edit ? updateForm() : addForm() 
     console.log(formValues)
 
+
     axios()
       .post("/posts", formValues)
       .then(response => {
-        console.log(response)
+        console.log(response);
       })
       .catch(error => {
-        console.log(error)
-      })
+        console.log(error);
+      });
 
-    setFormValues(initialState)
+    setFormValues(initialState);
     // console.log('current form values', formValues);
   }
+
   
   
   return(
@@ -125,6 +129,3 @@ const JournalForm = (edit, match: {params: {id}}) => {
         </Container>
       </div>
   )}
-
-
-export default JournalForm
