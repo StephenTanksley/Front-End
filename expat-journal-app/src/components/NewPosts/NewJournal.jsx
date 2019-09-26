@@ -16,6 +16,7 @@ const NewJournal = (props) => {
         <Photo src={entry.imageURL} alt="a user supplied image" />
         <CardTitle>Title: {entry.title}</CardTitle><br /> 
         <CardSubtitle><p>Date: {entry.date}</p></CardSubtitle>
+        <p></p>
         <p>{entry.content}</p>
 
       </CardBody>

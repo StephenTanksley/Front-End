@@ -5,8 +5,7 @@ import JournalForm from '../NewPosts/JournalForm'
 //Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
 //Axios call is going to use axiosWithAuth
 const Dashboard = () => {
-    const [journal, setJournal] = useState([]);
-    console.log('journal array from Dashboard', journal)
+
 
     
 
