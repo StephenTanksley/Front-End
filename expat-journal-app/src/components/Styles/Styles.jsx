@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
 import {CardImg} from 'reactstrap'
+import Media from '../Styles/Media'
 
 export const Container = styled.div`
     display: flex;
@@ -20,7 +21,7 @@ export const Card = styled.div`
     color: black;
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 30%;
     justify-content: space-between;
     align-items: center;
     border: .2rem solid white
@@ -30,7 +31,7 @@ export const Card = styled.div`
     padding: .5rem;
     padding-top: 1rem;
     background-color: white;
-
+    ${Media.phone` width: 80%`}
     :hover{
         box-shadow: .9rem .9rem .9rem lightgray;
     }
@@ -50,6 +51,7 @@ export const NavContainer = styled.div`
     margin: 0 auto;
     justify-content: space-around;
     align-items: center;
+    
 `;
 
 export const NavItem = styled(NavLink)`
@@ -64,6 +66,7 @@ export const NavItem = styled(NavLink)`
     padding: 4.5rem;
     width: 4.5rem
     height: 4.6rem;
+   
 
     color: white;
     
