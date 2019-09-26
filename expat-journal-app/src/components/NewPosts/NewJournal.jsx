@@ -1,25 +1,29 @@
 import React from "react";
-import { Card, Photo } from "../Styles/Styles";
-import { CardBody, CardTitle, CardSubtitle, Button } from "reactstrap";
-import { axiosWithAuth as axios } from "../axiosutil";
+import {Card, Photo} from '../Styles/Styles' 
+import {CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import {Link} from 'react-router-dom'
+import {axiosWithAuth as axios} from '../axiosutil'
+
 
 // This component displays the elements of a user's post. This entirely presentational.
 // There is no logic in this card at all. Just formatting the data provided by a user.
 
 const NewJournal = props => {
   console.log(props);
-  const entry = props.item;
-  const id = props.item.id;
+  const entry = props.item
+
   // console.log(entry);
 
   function handleDelete(e) {
     e.preventDefault();
-    axios()
-      .delete(`/posts/${id}`)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
+    console.log({ target: {name, value}})
+    // axios()
+    //   .delete(`/posts/${id}`)
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(res.data);
+    //   })
+
   }
 
   // function handleChange({ target: {name, value}}) {
@@ -30,6 +34,7 @@ const NewJournal = props => {
   //   e.preventDefault();
   //   setFormValues({ ...formValues, [name]: value})
   //   axios()
+  //    .put('/posts)
   // }
 
   //For the handleEdit function, we're taking in an event. The event is targeting something that has an ID associated with it.
@@ -45,10 +50,12 @@ const NewJournal = props => {
           <p>Date: {entry.date}</p>
         </CardSubtitle>
         <p>{entry.content}</p> <br />
-        <button type="submit">Edit</button>
-        <button type="submit" onClick={handleDelete}>
-          Delete
-        </button>
+
+        <button type="submit" onClick={handleEdit}>
+          <Link to={`/edit/${item.id}`} >Edit </Link>
+        </button> 
+        <button type="submit" onClick={handleDelete} >Delete</button>
+
       </CardBody>
     </Card>
   );
