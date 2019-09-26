@@ -24,6 +24,16 @@ const NewJournal = (props) => {
   }
 
 
+  // function handleChange({ target: {name, value}}) {
+  //   setFormValues({ ...formValues, [name]: value})
+  // }
+
+  // function handleEdit({ target: {name, value}}) {
+  //   e.preventDefault();
+  //   setFormValues({ ...formValues, [name]: value})
+  //   axios()
+  // }
+
   return (
     <Card>
       <CardBody>
