@@ -48,7 +48,8 @@ const JournalForm = () => {
     setFormValues(initialState)
     // console.log('current form values', formValues);
   }
-
+  
+  
   return(
       <div className='new-entry'>
         <Container>
