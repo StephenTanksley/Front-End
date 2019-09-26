@@ -34,19 +34,19 @@ const JournalForm = (edit, match: {params: {id}}) => {
   }, [])
 
   function updateForm() {
-    const updatedForm = picture.map(item => {
-      if(picture.id.toString() === id) {
+    const updatedForm = item.map(item => {
+      if(item.id.toString() === id) {
         return formValues;
       }else {
         return item;
       }
     })
-    setFormValues(updatedForm)
+    setPicture(updatedForm)
   }
 
   function addForm() {
     setFormValues(state =>({...state}))
-    setPicture([ ...picture, formValues])
+    // setPicture([ ...picture, formValues])
   }
  
   function handleChange({ target: {name, value}}) {
@@ -56,7 +56,7 @@ const JournalForm = (edit, match: {params: {id}}) => {
 
   function handleSubmit(e) { 
     e.preventDefault();
-    edit? updateForm : addForm
+    edit ? updateForm() : addForm() 
     console.log(formValues)
 
     axios()
