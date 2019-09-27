@@ -6,7 +6,8 @@ import { axiosWithAuth as axios } from '../axiosutil';
 //Keep working without auth, but know that we're putting auth back in.
 
 //This component accepts user input. This is our form.
-const JournalForm = (edit, match: {params: {id}}) => {
+const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) => {
+  console.log(props)
   const [formValues, setFormValues] = useState({
     title: "",
     city: "",
@@ -27,7 +28,6 @@ const JournalForm = (edit, match: {params: {id}}) => {
     user_id: ""
   };
 
-
   useEffect(() => {
     if (edit) {
       const editForm = picture.filter(picture => picture.id.toString() === id)[0]
@@ -35,8 +35,12 @@ const JournalForm = (edit, match: {params: {id}}) => {
     }
   }, [])
 
+  function handleChange({ target: {name, value}}) {
+    setFormValues({ ...formValues, [name]: value})
+  }
+
   function updateForm() {
-    const updatedForm = item.map(item => {
+    const updatedForm = picture.map(item => {
       if(item.id.toString() === id) {
         return formValues;
       }else {
@@ -47,18 +51,14 @@ const JournalForm = (edit, match: {params: {id}}) => {
   }
 
   function addForm() {
-    setFormValues(state =>({...state}))
-    // setPicture([ ...picture, formValues])
+    setFormValues(state =>({...state, id: picture.id}))
+    setPicture([ ...picture, formValues])
   }
- 
-  function handleChange({ target: {name, value}}) {
-    setFormValues({ ...formValues, [name]: value})
 
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    edit ? updateForm() : addForm() 
+    edit ? updateForm(formValues.id) : addForm()
     console.log(formValues)
 
 
@@ -129,3 +129,5 @@ const JournalForm = (edit, match: {params: {id}}) => {
         </Container>
       </div>
   )}
+
+  export default JournalForm
