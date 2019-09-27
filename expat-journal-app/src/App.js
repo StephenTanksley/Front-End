@@ -16,11 +16,19 @@ function App() {
       </Container>
 
       <Switch>
-        <Route path="/sign-up" render={props => <UserSignup {...props} />} />
 
-        <Route path="/login" render={props => <UserLogin {...props} />} />
+        <Route 
+          path="/sign-up" 
+          render={props => <UserSignup {...props} />} />
 
-        <Route path="/" exact render={props => <Dashboard {...props} />} />
+        <Route 
+          path="/login" 
+          render={props => <UserLogin {...props} />} />
+
+        <Route 
+          path="/" 
+          exact render={props => <Dashboard {...props} />} />
+
       </Switch>
     </>
   );
