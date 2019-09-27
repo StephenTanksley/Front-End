@@ -1,82 +1,98 @@
-
-import React, {useState, useEffect} from 'react'
-import {Route, Switch} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import { Container, GridView } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
-import JournalForm from '../NewPosts/JournalForm' 
-import { axiosWithAuth as axios} from '../axiosutil';
-
+import JournalForm from '../NewPosts/JournalForm'
+import { axiosWithAuth as axios } from '../axiosutil'
 
 //Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
-//Axios call is going to use axiosWithAuth
 const Dashboard = () => {
-  const [picture, setPicture] = useState([]);
-
+  const [picture, setPicture] = useState([])
+  const [toggle, setToggle] = useState(false)
+  const [item, setItem] = useState({})
   const sortedPictures = picture.sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
-  );
-
-  // console.log('Sorted pictures array', sortedPictures)
+  )
 
   const id = sortedPictures.map(item => {
     // console.log(item.id)
-    return item.id;
+    return item.id
   })
 
   useEffect(() => {
     axios()
       .get(`/posts`) // api goes here
       .then(response => {
-        setPicture(response.data);
+        setPicture(response.data)
         // console.log(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
 
-       })
-       .catch(error => {
-         console.log(error);
-       });
-    }, []);
+  function updatePosts() {
+    axios()
+      .get('/posts')
+      .then(response => {
+        setPicture(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
-        return (
- 
-        <div>
+  function addForm() {
+    setToggle(false)
+  }
 
-        <Container>
-            <h1>My Adventures</h1>
-        </Container>
+  function updateForm(item) {
+    setToggle(true)
 
-        <Switch>
-            <Route exact path='/' 
-              render={props => <JournalForm 
-                {...props} 
-                picture={picture} 
-                setPicture={setPicture} 
-                id={id}
-                edit={false} /> } />
+    setItem(item)
+    console.log(item)
 
-            <Route path='/edit/:id' 
-              render={props => <JournalForm 
-                {...props} 
-                picture={picture} 
-                setPicture={setPicture}
-                id={id}
-                edit={true} /> } />
-        </Switch>    
+    // const updatedForm = picture.map(item => {
+    //   if(item.id.toString() === props.id) {
+    //     return formValues(item.id);
+    //   }else {
+    //     return item;
+    //   }
+    // })
+    // setPicture(updatedForm)
+  }
 
-            {/*This is the form where you input information to create a new card.*/}
-            <GridView>
-            {sortedPictures.map((item, index) => {
-                return(
-                    <NewJournal
-                        item={item}
-                        key={index}
-                        id={item.id} />
-                )})}
-                </GridView>
-                
-            </div>
+  return (
+    <div>
+      <Container>
+        <h1>My Adventures</h1>
+      </Container>
+      <JournalForm
+        key={toggle}
+        toggle={toggle}
+        item={item}
+        picture={picture}
+        setPicture={setPicture}
+        addForm={addForm}
+        updatePosts={updatePosts}
+        id={id}
+      />
 
-        )
+      {/*This is the form where you input information to create a new card.*/}
+      <GridView>
+        {sortedPictures.map((item, index) => {
+          return (
+            <NewJournal
+              item={item}
+              key={index}
+              id={item.id}
+              updateForm={updateForm}
+              updatePosts={updatePosts}
+            />
+          )
+        })}
+      </GridView>
+    </div>
+  )
+}
 
-    }
-
-export default Dashboard;
+export default Dashboard

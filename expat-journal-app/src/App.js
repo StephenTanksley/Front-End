@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./App.css";
 import UserSignup from "./components/LoginSignin/UserSignup";
 import UserLogin from "./components/LoginSignin/UserLogin";
@@ -15,7 +15,6 @@ function App() {
         <h1>Expat Journal</h1>
       </Container>
 
-      <Switch>
 
         <Route 
           path="/sign-up" 
@@ -29,7 +28,6 @@ function App() {
           path="/" 
           exact render={props => <Dashboard {...props} />} />
 
-      </Switch>
     </>
   );
 }
