@@ -12,11 +12,11 @@ const NewJournal = props => {
   console.log(props);
   const entry = props.item
   
-  console.log(entry);
+  console.log(entry.user_id);
 
   function handleDelete(e) {
     e.preventDefault();
-    const user_id = localStorage.getItem('user')
+    const user_id = entry.user_id
     axios()
       .delete(`/posts/${entry.id}/user/${user_id}`)
       .then(res => {

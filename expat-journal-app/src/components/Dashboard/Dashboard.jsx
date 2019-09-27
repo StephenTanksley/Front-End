@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom'
 import { Container, GridView } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
 import JournalForm from '../NewPosts/JournalForm' 
-import { axiosWithoutAuth as axios} from '../axiosutil';
+import { axiosWithAuth as axios} from '../axiosutil';
 
 
 //Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
@@ -29,7 +29,7 @@ const Dashboard = () => {
          console.log(error);
        });
     }, []);
-   
+
         return (
  
         <div>

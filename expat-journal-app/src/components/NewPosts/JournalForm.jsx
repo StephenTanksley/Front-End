@@ -7,7 +7,6 @@ import { axiosWithAuth as axios } from '../axiosutil';
 
 //This component accepts user input. This is our form.
 const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) => {
-  console.log(props)
   const [formValues, setFormValues] = useState({
     title: "",
     city: "",
@@ -15,7 +14,6 @@ const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) 
     date: null,
     content: "",
     imageURL: "",
-    user_id: ""
   });
 
   const initialState = {
@@ -25,7 +23,6 @@ const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) 
     date: null,
     content: "",
     imageURL: "",
-    user_id: ""
   };
 
   useEffect(() => {
@@ -57,13 +54,15 @@ const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) 
 
 
   function handleSubmit(e) {
+    const user_id = localStorage.getItem('user')
+    const post = {...formValues, user_id: user_id}
     e.preventDefault();
     edit ? updateForm(formValues.id) : addForm()
     console.log(formValues)
 
 
     axios()
-      .post("/posts", formValues)
+      .post("/posts/", post)
       .then(response => {
         console.log(response);
       })
