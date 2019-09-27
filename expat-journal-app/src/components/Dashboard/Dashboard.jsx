@@ -57,7 +57,6 @@ const Dashboard = () => {
       // setPicture(updatedForm)
     }
 
-
         return (
  
         <div>
@@ -65,17 +64,13 @@ const Dashboard = () => {
         <Container>
             <h1>My Adventures</h1>
         </Container>
-
-            <Route path='/' 
-              render={props => <JournalForm 
-                {...props} 
+              <JournalForm 
                 toggle={toggle}
                 item={item}
                 picture={picture} 
                 setPicture={setPicture}
                 addForm={addForm} 
-                id={id}
-                /> } />   
+                id={id} /> 
 
             {/*This is the form where you input information to create a new card.*/}
             <GridView>

@@ -12,6 +12,7 @@ function JournalForm( props, toggle, picture, setPicture ){
   console.log(props.item)
   console.log(props.toggle)
 
+  //used to collect value input from the user and populate the picture object.
   const [formValues, setFormValues] = useState({
     title: "",
     city: "",
@@ -19,8 +20,9 @@ function JournalForm( props, toggle, picture, setPicture ){
     // date: null,
     content: "",
     imageURL: "",
-  }); 
+  });
 
+  //used to reset the form at the end.
   const initialState = {
     title: "",
     city: "",
@@ -29,7 +31,6 @@ function JournalForm( props, toggle, picture, setPicture ){
     content: "",
     imageURL: "",
   };
-
 
   // console.log(props.id)
 
@@ -60,13 +61,15 @@ function JournalForm( props, toggle, picture, setPicture ){
   //   setPicture(updatedForm)
   // }
 
-  useEffect(() => {
-    if(toggle) {
-      setFormValues(props.item)
-    }
-  })
+  // useEffect(() => {
+  //   if(toggle) {
+  //     setFormValues(props.item)
+  //   }
+  // })
+
 
   function handleChange({ target: {name, value}}) {
+   
     setFormValues({[name]: value})
     console.log(toggle)
   }
