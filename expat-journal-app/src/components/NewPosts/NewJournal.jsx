@@ -9,14 +9,14 @@ import {axiosWithAuth as axios} from '../axiosutil'
 // There is no logic in this card at all. Just formatting the data provided by a user.
 
 const NewJournal = props => {
-  console.log(props);
+  // console.log(props);
   const entry = props.item
   
-  console.log(entry);
+  // console.log(entry.id);
 
   function handleDelete(e) {
     e.preventDefault();
-    const user_id = localStorage.getItem('user')
+    const user_id = entry.user_id
     axios()
       .delete(`/posts/${entry.id}/user/${user_id}`)
       .then(res => {
@@ -29,15 +29,6 @@ const NewJournal = props => {
       })
   }
 
-  // function handleEdit({ target: {name, value}}) {
-  //   e.preventDefault();
-  //   setFormValues({ ...formValues, [name]: value})
-  //   axios()
-  //    .put('/posts)
-  // }
-
-  //For the handleEdit function, we're taking in an event. The event is targeting something that has an ID associated with it.
-  //We want to pull in that ID
 
   return (
     <Card>
@@ -51,9 +42,7 @@ const NewJournal = props => {
         <p>{entry.content}</p> <br />
 
         <div>
-          <button type="submit" > Edit </button> 
-
-          {/* <Link to={`/edit/${item.id}`} >Edit </Link> */}
+          <button type="submit" > <Link to={`/edit/${entry.id}`} > Edit  </Link> </button> 
       
           <button type="submit" onClick={handleDelete} > Delete </button>
         </div>

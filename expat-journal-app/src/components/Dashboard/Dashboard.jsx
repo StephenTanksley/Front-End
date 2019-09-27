@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom'
 import { Container, GridView } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
 import JournalForm from '../NewPosts/JournalForm' 
-import { axiosWithoutAuth as axios} from '../axiosutil';
+import { axiosWithAuth as axios} from '../axiosutil';
 
 
 //Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
@@ -16,20 +16,26 @@ const Dashboard = () => {
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
 
+  // console.log('Sorted pictures array', sortedPictures)
+
+  const id = sortedPictures.map(item => {
+    // console.log(item.id)
+    return item.id;
+  })
+
   useEffect(() => {
     axios()
       .get(`/posts`) // api goes here
       .then(response => {
         setPicture(response.data);
-        console.log(response.data);
-        //  console.log(response.data.imageUrl)
-      
+        // console.log(response.data)
+
        })
        .catch(error => {
          console.log(error);
        });
     }, []);
-   
+
         return (
  
         <div>
@@ -39,9 +45,21 @@ const Dashboard = () => {
         </Container>
 
         <Switch>
-            <Route path='/' render={props => <JournalForm {...props} picture={picture} setPicture={setPicture} edit={false} /> } />
+            <Route exact path='/' 
+              render={props => <JournalForm 
+                {...props} 
+                picture={picture} 
+                setPicture={setPicture} 
+                id={id}
+                edit={false} /> } />
 
-            <Route path='/edit/:id' render={props => <JournalForm {...props} picture={picture} setPicture={setPicture} edit={true} /> } />
+            <Route path='/edit/:id' 
+              render={props => <JournalForm 
+                {...props} 
+                picture={picture} 
+                setPicture={setPicture}
+                id={id}
+                edit={true} /> } />
         </Switch>    
 
             {/*This is the form where you input information to create a new card.*/}
@@ -50,7 +68,8 @@ const Dashboard = () => {
                 return(
                     <NewJournal
                         item={item}
-                        key={index} />
+                        key={index}
+                        id={item.id} />
                 )})}
                 </GridView>
                 

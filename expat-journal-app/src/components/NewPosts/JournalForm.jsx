@@ -6,31 +6,29 @@ import { axiosWithAuth as axios } from '../axiosutil';
 //Keep working without auth, but know that we're putting auth back in.
 
 //This component accepts user input. This is our form.
-const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) => {
-  console.log(props)
+function JournalForm( props, picture, setPicture, edit ){
   const [formValues, setFormValues] = useState({
     title: "",
     city: "",
     country: "",
-    date: null,
+    // date: null,
     content: "",
     imageURL: "",
-    user_id: ""
-  });
+  }); 
 
   const initialState = {
     title: "",
     city: "",
     country: "",
-    date: null,
+    // date: null,
     content: "",
     imageURL: "",
-    user_id: ""
   };
 
-  useEffect(() => {
+
+  useEffect(( props, edit, picture ) => {
     if (edit) {
-      const editForm = picture.filter(picture => picture.id.toString() === id)[0]
+      const editForm = picture.filter(picture => picture.item.id.toString() === props.id)[0]
       setFormValues(editForm)
     }
   }, [])
@@ -39,10 +37,15 @@ const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) 
     setFormValues({ ...formValues, [name]: value})
   }
 
+  function addForm() {
+    setFormValues(state =>({...state, id: props.id}))
+    // setPicture([ ...picture, formValues])
+  }
+
   function updateForm() {
     const updatedForm = picture.map(item => {
-      if(item.id.toString() === id) {
-        return formValues;
+      if(item.id.toString() === props.id) {
+        return formValues(item.id);
       }else {
         return item;
       }
@@ -50,20 +53,18 @@ const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) 
     setPicture(updatedForm)
   }
 
-  function addForm() {
-    setFormValues(state =>({...state, id: picture.id}))
-    setPicture([ ...picture, formValues])
-  }
-
 
   function handleSubmit(e) {
+    const user_id = localStorage.getItem('user')
+    const post = {...formValues, user_id: user_id}
+    // const id = {...formValues, id: id}
     e.preventDefault();
-    edit ? updateForm(formValues.id) : addForm()
-    console.log(formValues)
 
+    //When we're submitting, we want to know if the submission is an edit or an added form.
+    edit ? updateForm(formValues) : addForm(formValues)
 
     axios()
-      .post("/posts", formValues)
+      .post("/posts/", post)
       .then(response => {
         console.log(response);
       })
@@ -72,7 +73,6 @@ const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) 
       });
 
     setFormValues(initialState);
-    // console.log('current form values', formValues);
   }
 
   
