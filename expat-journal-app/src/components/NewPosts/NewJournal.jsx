@@ -2,7 +2,7 @@ import React from "react";
 import {Card, Photo} from '../Styles/Styles' 
 import {CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import {Link} from 'react-router-dom'
-import {axiosWithoutAuth as axios} from '../axiosutil'
+import {axiosWithAuth as axios} from '../axiosutil'
 
 
 // This component displays the elements of a user's post. This entirely presentational.
@@ -16,8 +16,9 @@ const NewJournal = props => {
 
   function handleDelete(e) {
     e.preventDefault();
+    const user_id = localStorage.getItem('user')
     axios()
-      .delete(`/posts/${entry.id}`)
+      .delete(`/posts/${entry.id}/user/${user_id}`)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -53,10 +54,13 @@ const NewJournal = props => {
         </CardSubtitle>
         <p>{entry.content}</p> <br />
 
-        <button type="submit" > Edit </button> 
-          {/* <Link to={`/edit/${item.id}`} >Edit </Link> */}
+        <div>
+          <button type="submit" > Edit </button> 
 
-        <button type="submit" onClick={handleDelete} > Delete </button>
+          {/* <Link to={`/edit/${item.id}`} >Edit </Link> */}
+      
+          <button type="submit" onClick={handleDelete} > Delete </button>
+        </div>
 
       </CardBody>
     </Card>
