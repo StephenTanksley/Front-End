@@ -34,6 +34,7 @@ const NewJournal = props => {
         console.log(err)
       })
 
+    // call update posts to update list of posts
     props.updatePosts()
   }
 
