@@ -1,7 +1,6 @@
 import React from "react";
 import {Card, Photo} from '../Styles/Styles' 
 import {CardBody, CardTitle, CardSubtitle} from 'reactstrap';
-import {Link} from 'react-router-dom'
 import {axiosWithAuth as axios} from '../axiosutil'
 
 
@@ -17,6 +16,8 @@ const NewJournal = props => {
   function handleEdit(e) {
     e.preventDefault();
     props.updateForm(entry);
+
+    // console.log(props.updateForm(entry.item))
   }
 
   function handleDelete(e) {

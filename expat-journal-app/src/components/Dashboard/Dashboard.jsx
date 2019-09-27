@@ -1,6 +1,5 @@
 
 import React, {useState, useEffect} from 'react'
-import {Route, Switch} from 'react-router-dom'
 import { Container, GridView } from '../Styles/Styles'
 import NewJournal from '../NewPosts/NewJournal'
 import JournalForm from '../NewPosts/JournalForm' 
@@ -8,7 +7,6 @@ import { axiosWithAuth as axios} from '../axiosutil';
 
 
 //Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
-//Axios call is going to use axiosWithAuth
 const Dashboard = () => {
   const [picture, setPicture] = useState([]);
   const [toggle, setToggle] = useState(false);
@@ -16,8 +14,6 @@ const Dashboard = () => {
   const sortedPictures = picture.sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
-
-  // console.log('Sorted pictures array', sortedPictures)
 
   const id = sortedPictures.map(item => {
     // console.log(item.id)
@@ -38,15 +34,15 @@ const Dashboard = () => {
 
   
     function addForm() {
-      // setFormValues(state =>({...state, id: props.id}))
-      // setPicture([ ...picture, formValues])
       setToggle(false)
     }
   
     function updateForm(item) {
       setToggle(true);
-      console.log(item)
+      
       setItem(item)
+      console.log(item)
+      
       // const updatedForm = picture.map(item => {
       //   if(item.id.toString() === props.id) {
       //     return formValues(item.id);
@@ -66,6 +62,7 @@ const Dashboard = () => {
         </Container>
               <JournalForm 
                 toggle={toggle}
+
                 item={item}
                 picture={picture} 
                 setPicture={setPicture}
