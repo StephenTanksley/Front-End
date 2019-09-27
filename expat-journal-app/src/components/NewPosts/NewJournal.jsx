@@ -2,7 +2,7 @@ import React from "react";
 import {Card, Photo} from '../Styles/Styles' 
 import {CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import {Link} from 'react-router-dom'
-import {axiosWithAuth as axios} from '../axiosutil'
+import {axiosWithoutAuth as axios} from '../axiosutil'
 
 
 // This component displays the elements of a user's post. This entirely presentational.
@@ -11,23 +11,25 @@ import {axiosWithAuth as axios} from '../axiosutil'
 const NewJournal = props => {
   console.log(props);
   const entry = props.item
-
-  // console.log(entry);
+  
+  console.log(entry);
 
   function handleDelete(e) {
     e.preventDefault();
-    console.log({ target: {name, value}})
-    // axios()
-    //   .delete(`/posts/${id}`)
-    //   .then(res => {
-    //     console.log(res);
-    //     console.log(res.data);
-    //   })
-
+    axios()
+      .delete(`/posts/${entry.id}`)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
-  // function handleChange({ target: {name, value}}) {
-  //   setFormValues({ ...formValues, [name]: value})
+  // function sayHi(e) {
+  //   e.preventDefault()
+  //   alert('Hello!')
   // }
 
   // function handleEdit({ target: {name, value}}) {
@@ -51,13 +53,15 @@ const NewJournal = props => {
         </CardSubtitle>
         <p>{entry.content}</p> <br />
 
-        <button type="submit" onClick={handleEdit}>
-          <Link to={`/edit/${item.id}`} >Edit </Link>
-        </button> 
-        <button type="submit" onClick={handleDelete} >Delete</button>
+        <button type="submit" > Edit </button> 
+          {/* <Link to={`/edit/${item.id}`} >Edit </Link> */}
+
+        <button type="submit" onClick={handleDelete} > Delete </button>
 
       </CardBody>
     </Card>
   );
 };
 export default NewJournal;
+
+// onClick={handleEdit}
