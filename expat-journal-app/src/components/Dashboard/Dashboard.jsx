@@ -39,7 +39,7 @@ const Dashboard = () => {
         </Container>
 
         <Switch>
-            <Route path='/' render={props => <JournalForm {...props} picture={picture} setPicture={setPicture} edit={false} /> } />
+            <Route exact path='/' render={props => <JournalForm {...props} picture={picture} setPicture={setPicture} edit={false} /> } />
 
             <Route path='/edit/:id' render={props => <JournalForm {...props} picture={picture} setPicture={setPicture} edit={true} /> } />
         </Switch>    

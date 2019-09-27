@@ -6,7 +6,8 @@ import { axiosWithAuth as axios } from '../axiosutil';
 //Keep working without auth, but know that we're putting auth back in.
 
 //This component accepts user input. This is our form.
-const JournalForm = ({ props, picture, setPicture, edit, match:{params: {id}}}) => {
+const JournalForm = ({ props, picture, setPicture, edit }) => {
+  
   const [formValues, setFormValues] = useState({
     title: "",
     city: "",

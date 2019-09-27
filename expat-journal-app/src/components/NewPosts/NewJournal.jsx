@@ -12,7 +12,7 @@ const NewJournal = props => {
   console.log(props);
   const entry = props.item
   
-  console.log(entry.user_id);
+  console.log(entry.id);
 
   function handleDelete(e) {
     e.preventDefault();
@@ -51,9 +51,7 @@ const NewJournal = props => {
         <p>{entry.content}</p> <br />
 
         <div>
-          <button type="submit" > Edit </button> 
-
-          {/* <Link to={`/edit/${item.id}`} >Edit </Link> */}
+          <button type="submit" > <Link to={`/edit/${entry.id}`} > Edit  </Link> </button> 
       
           <button type="submit" onClick={handleDelete} > Delete </button>
         </div>
