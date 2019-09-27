@@ -6,7 +6,12 @@ import { axiosWithAuth as axios } from '../axiosutil';
 //Keep working without auth, but know that we're putting auth back in.
 
 //This component accepts user input. This is our form.
-function JournalForm( props, picture, setPicture, edit ){
+function JournalForm( props, toggle, picture, setPicture ){
+
+  console.log(props)
+  console.log(props.item)
+  console.log(props.toggle)
+
   const [formValues, setFormValues] = useState({
     title: "",
     city: "",
@@ -26,44 +31,67 @@ function JournalForm( props, picture, setPicture, edit ){
   };
 
 
-  useEffect(( props, edit, picture ) => {
-    if (edit) {
-      const editForm = picture.filter(picture => picture.item.id.toString() === props.id)[0]
-      setFormValues(editForm)
+  // console.log(props.id)
+
+  // useEffect(( props, toggle, setToggle, picture ) => {
+  //   if (toggle === true) {
+  //     //This is supposed to set the values in the form equal to the values listed at picture.item.id
+  //     const editForm = picture.filter(picture => picture.id.toString() === props.id)[0]
+  //     setFormValues(editForm)
+  //   }
+  // }, [toggle])
+
+
+  
+  // function addForm() {
+  //   setFormValues(state =>({...state, id: props.id}))
+  //   setPicture([ ...picture, formValues])
+  // }
+
+  // function updateForm() {
+  //   setToggle(true);
+  //   const updatedForm = picture.map(item => {
+  //     if(item.id.toString() === props.id) {
+  //       return formValues(item.id);
+  //     }else {
+  //       return item;
+  //     }
+  //   })
+  //   setPicture(updatedForm)
+  // }
+
+  useEffect(() => {
+    if(toggle) {
+      setFormValues(props.item)
     }
-  }, [])
+  })
 
   function handleChange({ target: {name, value}}) {
-    setFormValues({ ...formValues, [name]: value})
+    setFormValues({[name]: value})
+    console.log(toggle)
   }
-
-  function addForm() {
-    setFormValues(state =>({...state, id: props.id}))
-    // setPicture([ ...picture, formValues])
-  }
-
-  function updateForm() {
-    const updatedForm = picture.map(item => {
-      if(item.id.toString() === props.id) {
-        return formValues(item.id);
-      }else {
-        return item;
-      }
-    })
-    setPicture(updatedForm)
-  }
-
 
   function handleSubmit(e) {
     const user_id = localStorage.getItem('user')
     const post = {...formValues, user_id: user_id}
-    // const id = {...formValues, id: id}
     e.preventDefault();
-
+    
     //When we're submitting, we want to know if the submission is an edit or an added form.
-    edit ? updateForm(formValues) : addForm(formValues)
-
-    axios()
+    
+    if(toggle) {
+      const changes = {formValues}
+      console.log(changes)
+      axios()
+        .put(`/posts/${props.item.id}`, formValues)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          props.addForm()
+          console.log(err)
+        })
+    } else {
+      axios()
       .post("/posts/", post)
       .then(response => {
         console.log(response);
@@ -71,22 +99,25 @@ function JournalForm( props, picture, setPicture, edit ){
       .catch(error => {
         console.log(error);
       });
-
+    }
+    // props.addForm();
     setFormValues(initialState);
   }
 
   
-  
   return(
       <div className='new-entry'>
+        <Container>{ toggle ? <p>Editing</p> : <p> Adding </p>}</Container>
+        
         <Container>
+          
           <form onSubmit={handleSubmit}>
             
             <input 
               className="input-field" 
               name="title" 
               placeholder="title" 
-              value={formValues.name}  
+              value={formValues.title}  
               onChange={handleChange} />
  
             <input 

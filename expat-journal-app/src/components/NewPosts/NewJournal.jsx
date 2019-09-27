@@ -14,6 +14,11 @@ const NewJournal = props => {
   
   // console.log(entry.id);
 
+  function handleEdit(e) {
+    e.preventDefault();
+    props.updateForm(entry);
+  }
+
   function handleDelete(e) {
     e.preventDefault();
     const user_id = entry.user_id
@@ -42,9 +47,9 @@ const NewJournal = props => {
         <p>{entry.content}</p> <br />
 
         <div>
-          <button type="submit" > <Link to={`/edit/${entry.id}`} > Edit  </Link> </button> 
+          <button type="button" onClick={handleEdit}> Edit </button> 
       
-          <button type="submit" onClick={handleDelete} > Delete </button>
+          <button type="button" onClick={handleDelete} > Delete </button>
         </div>
 
       </CardBody>

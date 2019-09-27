@@ -11,7 +11,8 @@ import { axiosWithAuth as axios} from '../axiosutil';
 //Axios call is going to use axiosWithAuth
 const Dashboard = () => {
   const [picture, setPicture] = useState([]);
-
+  const [toggle, setToggle] = useState(false);
+  const [item, setItem] = useState({});
   const sortedPictures = picture.sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
@@ -29,12 +30,33 @@ const Dashboard = () => {
       .then(response => {
         setPicture(response.data);
         // console.log(response.data)
-
        })
        .catch(error => {
          console.log(error);
        });
     }, []);
+
+  
+    function addForm() {
+      // setFormValues(state =>({...state, id: props.id}))
+      // setPicture([ ...picture, formValues])
+      setToggle(false)
+    }
+  
+    function updateForm(item) {
+      setToggle(true);
+      console.log(item)
+      setItem(item)
+      // const updatedForm = picture.map(item => {
+      //   if(item.id.toString() === props.id) {
+      //     return formValues(item.id);
+      //   }else {
+      //     return item;
+      //   }
+      // })
+      // setPicture(updatedForm)
+    }
+
 
         return (
  
@@ -44,23 +66,16 @@ const Dashboard = () => {
             <h1>My Adventures</h1>
         </Container>
 
-        <Switch>
-            <Route exact path='/' 
+            <Route path='/' 
               render={props => <JournalForm 
                 {...props} 
-                picture={picture} 
-                setPicture={setPicture} 
-                id={id}
-                edit={false} /> } />
-
-            <Route path='/edit/:id' 
-              render={props => <JournalForm 
-                {...props} 
+                toggle={toggle}
+                item={item}
                 picture={picture} 
                 setPicture={setPicture}
+                addForm={addForm} 
                 id={id}
-                edit={true} /> } />
-        </Switch>    
+                /> } />   
 
             {/*This is the form where you input information to create a new card.*/}
             <GridView>
@@ -69,7 +84,8 @@ const Dashboard = () => {
                     <NewJournal
                         item={item}
                         key={index}
-                        id={item.id} />
+                        id={item.id}
+                        updateForm={updateForm} />
                 )})}
                 </GridView>
                 
