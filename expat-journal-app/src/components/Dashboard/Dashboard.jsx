@@ -19,18 +19,16 @@ const Dashboard = () => {
   // console.log('Sorted pictures array', sortedPictures)
 
   const id = sortedPictures.map(item => {
-    console.log(item.id)
+    // console.log(item.id)
     return item.id;
   })
-
-  
 
   useEffect(() => {
     axios()
       .get(`/posts`) // api goes here
       .then(response => {
         setPicture(response.data);
-        console.log(response.data)
+        // console.log(response.data)
 
        })
        .catch(error => {
@@ -53,15 +51,14 @@ const Dashboard = () => {
                 picture={picture} 
                 setPicture={setPicture} 
                 id={id}
-                // id={picture.item.id}
                 edit={false} /> } />
 
             <Route path='/edit/:id' 
               render={props => <JournalForm 
                 {...props} 
                 picture={picture} 
-                setPicture={setPicture} 
-                // id={picture.item.id}
+                setPicture={setPicture}
+                id={id}
                 edit={true} /> } />
         </Switch>    
 

@@ -6,15 +6,12 @@ import { axiosWithAuth as axios } from '../axiosutil';
 //Keep working without auth, but know that we're putting auth back in.
 
 //This component accepts user input. This is our form.
-function JournalForm( props, picture, setPicture, id, edit ){
-  // console.log(props)
-  console.log('item id', props.id)
-
+function JournalForm( props, picture, setPicture, edit ){
   const [formValues, setFormValues] = useState({
     title: "",
     city: "",
     country: "",
-    date: null,
+    // date: null,
     content: "",
     imageURL: "",
   }); 
@@ -23,36 +20,37 @@ function JournalForm( props, picture, setPicture, id, edit ){
     title: "",
     city: "",
     country: "",
-    date: null,
+    // date: null,
     content: "",
     imageURL: "",
   };
 
-  // useEffect(() => {
-  //   if (edit) {
-  //     const editForm = picture.filter(picture => picture.id.toString() === id)[0]
-  //     setFormValues(editForm)
-  //   }
-  // }, [])
+
+  useEffect(( props, edit, picture ) => {
+    if (edit) {
+      const editForm = picture.filter(picture => picture.item.id.toString() === props.id)[0]
+      setFormValues(editForm)
+    }
+  }, [])
 
   function handleChange({ target: {name, value}}) {
     setFormValues({ ...formValues, [name]: value})
   }
 
-  // function updateForm() {
-  //   const updatedForm = picture.map(item => {
-  //     if(item.id.toString() === id) {
-  //       return formValues;
-  //     }else {
-  //       return item;
-  //     }
-  //   })
-  //   setPicture(updatedForm)
-  // }
-
   function addForm() {
-    setFormValues(state =>({...state, id: Date.now()}))
-    setPicture([ ...picture, formValues])
+    setFormValues(state =>({...state, id: props.id}))
+    // setPicture([ ...picture, formValues])
+  }
+
+  function updateForm() {
+    const updatedForm = picture.map(item => {
+      if(item.id.toString() === props.id) {
+        return formValues(item.id);
+      }else {
+        return item;
+      }
+    })
+    setPicture(updatedForm)
   }
 
 
@@ -60,10 +58,10 @@ function JournalForm( props, picture, setPicture, id, edit ){
     const user_id = localStorage.getItem('user')
     const post = {...formValues, user_id: user_id}
     // const id = {...formValues, id: id}
-    // console.log(id)
-    // console.log(post)
     e.preventDefault();
-    // edit ? updateForm(formValues.id) : addForm()
+
+    //When we're submitting, we want to know if the submission is an edit or an added form.
+    edit ? updateForm(formValues) : addForm(formValues)
 
     axios()
       .post("/posts/", post)
