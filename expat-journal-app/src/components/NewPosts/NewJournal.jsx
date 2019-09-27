@@ -20,6 +20,7 @@ const NewJournal = props => {
     axios()
       .delete(`/posts/${entry.id}/user/${user_id}`)
       .then(res => {
+        alert('Journal entry has been deleted.')
         console.log(res);
         console.log(res.data);
       })
@@ -27,11 +28,6 @@ const NewJournal = props => {
         console.log(err)
       })
   }
-
-  // function sayHi(e) {
-  //   e.preventDefault()
-  //   alert('Hello!')
-  // }
 
   // function handleEdit({ target: {name, value}}) {
   //   e.preventDefault();
