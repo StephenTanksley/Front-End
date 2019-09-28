@@ -76,17 +76,6 @@ export const NavContainer = styled.div`
 
 export const NavItem = styled(NavLink)`
     display: flex;
-<<<<<<< HEAD
-    font-size: 1.3rem;
-    text-shadow: 2px 2px 4px #000000;    
-    margin: 0 auto;
-    justify-content: space-between;
-    align-items: center;
-    text-decoration: none;
-    padding: 4.5rem;
-    width: 1.5rem
-    height: 4.6rem;
-=======
     font-size: 1.2rem;
     // border: .1rem solid white;
     text-shadow: 2px 2px 4px #000000;    
@@ -97,7 +86,6 @@ export const NavItem = styled(NavLink)`
    
     
     height: 3.6rem;
->>>>>>> c548fc5b26fac391ce9b4e428cafb52531c956d6
     
     color: white;
     order: 2;
@@ -137,18 +125,9 @@ export const NavItem = styled(NavLink)`
 `;
 
 export const Photo = styled(CardImg)`
-<<<<<<< HEAD
-  display: flex;
-
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  justify-content: center;
-  align-items: center;
-=======
   border-radius: 0.5rem;
   margin: 0 auto;
   padding-bottom: 1rem;
->>>>>>> c548fc5b26fac391ce9b4e428cafb52531c956d6
 `;
 
 export const GridView = styled.div`
