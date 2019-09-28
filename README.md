@@ -41,11 +41,16 @@ Link to the Expat Journal Product Canvas - https://docs.google.com/document/d/1J
 
 Installation
 
-git clone [repo]
-cd [repo]
-npm install
-npm install yup axios reactstrap formik react-router-dom styled-components
-npm start - starts the project
+1) git clone [repo]
+
+2) cd [repo]
+
+3) npm install
+
+4) npm install yup axios reactstrap formik react-router-dom styled-components
+
+5) npm start - starts the project
+
 
 Credits
 
