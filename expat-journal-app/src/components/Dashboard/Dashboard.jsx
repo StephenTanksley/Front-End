@@ -5,6 +5,7 @@ import JournalForm from '../NewPosts/JournalForm'
 import { axiosWithAuth as axios } from '../axiosutil'
 
 //Dashboard assumes that you're already logged in and have a user in local storage and a token in local storage.
+
 const Dashboard = () => {
   const [picture, setPicture] = useState([])
   const [toggle, setToggle] = useState(false)
@@ -14,7 +15,6 @@ const Dashboard = () => {
   )
 
   const id = sortedPictures.map(item => {
-    // console.log(item.id)
     return item.id
   })
 
@@ -23,7 +23,6 @@ const Dashboard = () => {
       .get(`/posts`) // api goes here
       .then(response => {
         setPicture(response.data)
-        // console.log(response.data)
       })
       .catch(error => {
         console.log(error)
@@ -51,14 +50,6 @@ const Dashboard = () => {
     setItem(item)
     console.log(item)
 
-    // const updatedForm = picture.map(item => {
-    //   if(item.id.toString() === props.id) {
-    //     return formValues(item.id);
-    //   }else {
-    //     return item;
-    //   }
-    // })
-    // setPicture(updatedForm)
   }
 
   return (
@@ -78,6 +69,7 @@ const Dashboard = () => {
       />
 
       {/*This is the form where you input information to create a new card.*/}
+
       <GridView>
         {sortedPictures.map((item, index) => {
           return (

@@ -3,12 +3,13 @@ import { Container } from '../Styles/Styles'
 import { axiosWithAuth as axios } from '../axiosutil'
 
 //This component accepts user input. This is our form.
-function JournalForm(props, toggle, picture, setPicture) {
+function JournalForm(props, toggle ) {
   console.log(props)
   console.log(props.item)
   console.log(props.toggle)
 
-  //used to collect value input from the user and populate the picture object.
+  //used to collect value input from the user and populate the formValues object.
+  
   const [formValues, setFormValues] = useState({
     title: '',
     city: '',
@@ -18,6 +19,7 @@ function JournalForm(props, toggle, picture, setPicture) {
   })
 
   //used to reset the form at the end.
+  
   const initialState = {
     title: '',
     city: '',
@@ -26,46 +28,14 @@ function JournalForm(props, toggle, picture, setPicture) {
     imageURL: ''
   }
 
-  // This runs when component mounts populating
-  // the form with post data - Tyler
+  // This runs when component mounts populating the form with post data - Tyler
+  
   useEffect(() => {
     if (props.toggle) {
       setFormValues({ ...formValues, ...props.item })
     }
   }, [])
 
-  // console.log(props.id)
-
-  // useEffect(( props, toggle, setToggle, picture ) => {
-  //   if (toggle === true) {
-  //     //This is supposed to set the values in the form equal to the values listed at picture.item.id
-  //     const editForm = picture.filter(picture => picture.id.toString() === props.id)[0]
-  //     setFormValues(editForm)
-  //   }
-  // }, [toggle])
-
-  // function addForm() {
-  //   setFormValues(state =>({...state, id: props.id}))
-  //   setPicture([ ...picture, formValues])
-  // }
-
-  // function updateForm() {
-  //   setToggle(true);
-  //   const updatedForm = picture.map(item => {
-  //     if(item.id.toString() === props.id) {
-  //       return formValues(item.id);
-  //     }else {
-  //       return item;
-  //     }
-  //   })
-  //   setPicture(updatedForm)
-  // }
-
-  // useEffect(() => {
-  //   if(toggle) {
-  //     setFormValues(props.item)
-  //   }
-  // })
 
   //When we change an item in the form, we use this to update values in state.
   function handleChange({ target: { name, value } }) {
@@ -95,6 +65,7 @@ function JournalForm(props, toggle, picture, setPicture) {
           props.addForm()
           console.log(err)
         })
+
     } else {
       axios()
         .post('/posts/', post)
@@ -105,8 +76,10 @@ function JournalForm(props, toggle, picture, setPicture) {
           console.log(error)
         })
     }
+    
     // reset form state back to initial state
     setFormValues(initialState)
+    
     // this updates the list of posts
     props.updatePosts()
   }
@@ -130,7 +103,7 @@ function JournalForm(props, toggle, picture, setPicture) {
             placeholder="picture URL"
             value={formValues.imageURL}
             onChange={handleChange}
-          />{' '}
+          />
           <br />
           <input
             className="input-field"
@@ -145,7 +118,7 @@ function JournalForm(props, toggle, picture, setPicture) {
             placeholder="country"
             value={formValues.country}
             onChange={handleChange}
-          />{' '}
+          />
           <br />
           <input
             className="input-field description"

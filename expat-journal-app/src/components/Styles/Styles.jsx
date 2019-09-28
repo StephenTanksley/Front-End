@@ -64,7 +64,7 @@ export const SomeForm = styled.div`
 export const NavContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   ${Media.smallest` width: 70%;
     flex-direction: column;
@@ -76,15 +76,14 @@ export const NavContainer = styled.div`
 
 export const NavItem = styled(NavLink)`
     display: flex;
-    font-size: 2rem;
-    // border: .1rem solid white;
+    font-size: 1.3rem;
     text-shadow: 2px 2px 4px #000000;    
     margin: 0 auto;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-decoration: none;
     padding: 4.5rem;
-    width: 4.5rem
+    width: 1.5rem
     height: 4.6rem;
     
     color: white;
@@ -106,7 +105,12 @@ export const NavItem = styled(NavLink)`
 `;
 
 export const Photo = styled(CardImg)`
-  border-radius: 0.5rem;
+  display: flex;
+
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const GridView = styled.div`
