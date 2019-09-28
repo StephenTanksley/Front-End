@@ -57,13 +57,21 @@ Credits
 GitHub Organization - https://github.com/Build-Week-Expat-Journal-Sept-19
 
 Marketing Page Team
+
 Natacha David - UI Developer
+
 Timothy Grey - UI Developer
+
 Front End Team
+
 Stephen Tanksley - Front End Architect
+
 Tim Mitzen - Front End Architect
+
 Back End Team
+
 Tyler Turnipseed - Back End Architect
+
 Sir Williams - Back End Architect
 
 
