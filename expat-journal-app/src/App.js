@@ -11,9 +11,7 @@ function App() {
   return (
     <>
       <Nav />
-      <Container>
-        <h1>Expat Journal</h1>
-      </Container>
+      
 
 
         <Route 

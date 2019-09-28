@@ -41,14 +41,16 @@ const NewJournal = props => {
   return (
     <Card>
       <CardBody>
+        <div>
         <Photo src={entry.imageURL} alt="a user supplied image" />
         <CardTitle>Title: {entry.title}</CardTitle>
-        <br />
-        <CardSubtitle>
-          {entry.date && `Date: ${readableDate.toLocaleDateString()}`}
-        </CardSubtitle>
+       
+        
+          {entry.date && <CardSubtitle>Date: {readableDate.toLocaleDateString()}</CardSubtitle>}
+        
         <p>{entry.content}</p> <br />
-        <div>
+        </div>
+        <div className='action-buttons'>
           <button type="button" onClick={handleEdit}>
             {' '}
             Edit{' '}

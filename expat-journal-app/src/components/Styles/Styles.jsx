@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: .5rem;
   margin: 1rem;
   ${Media.smallest`
     padding: 0;
@@ -23,23 +23,22 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div`
-
-    font-size: 62.5%;
-    font-size: 1.2rem;
+    
+    
+    font-size: .9rem;
     line-height: 1.5rem;
     color: black;
-    display: flex;
-    flex-direction: column;
-    width: 30%;
+    width: 40%;
     justify-content: space-evenly;
     align-items: center;
-    border: .2rem solid white
+   
     margin: 1.3rem;
     border: .2rem solid gray;
     border-radius: .5rem;
     padding: .5rem;
     padding-top: 1rem;
     background-color: white;
+    
     ${Media.smallest` width: 80%;
     font-size: .8rem;
     padding: .2rem;
@@ -66,51 +65,97 @@ export const NavContainer = styled.div`
   margin: 0 auto;
   justify-content: space-around;
   align-items: center;
-  ${Media.smallest` width: 70%;
-    flex-direction: column;
-    `}
-  ${Media.small` width: 70%;
-    flex-direction: column;
-    `}
+  background-color: lightgray;
+  width: 100%;
+  flex-wrap: wrap
+  ${Media.tiny`
+  ;`}
+  
+  }
 `;
 
 export const NavItem = styled(NavLink)`
     display: flex;
-    font-size: 2rem;
+    font-size: 1.2rem;
     // border: .1rem solid white;
     text-shadow: 2px 2px 4px #000000;    
-    margin: 0 auto;
+    
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    padding: 4.5rem;
-    width: 4.5rem
-    height: 4.6rem;
+   
+    
+    height: 3.6rem;
     
     color: white;
+    order: 2;
     ${Media.smallest`
     padding: 0;
-    font-size: 1.5rem;
-    height: 3rem;
+    font-size: 1rem;
+    
     `}
     ${Media.small`
     padding: 0;
     font-size: 1.5rem;
-    height: 3rem;
+  
+   
     `}
+    ${Media.medium`
+    padding: 0;
+    font-size: 1rem;
+    
+   
+    `}
+    ${Media.tiny`
+    font-size: .8rem;
+    width: 33%;
+    
+    
+    
+  
+    
+  `}
+    
     
     :hover {
         transform: scale(1.1);
         color: lightgray;
+        cursor: pointer;
     }
 `;
 
 export const Photo = styled(CardImg)`
   border-radius: 0.5rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
 `;
 
 export const GridView = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+`;
+
+export const BrandTitle = styled.div`
+font-size: 2rem;
+display: flex;
+font-size: 1.2rem;
+    
+text-shadow: 2px 2px 4px #000000;    
+    
+justify-content: center;
+align-items: center;
+text-decoration: none;
+height: 3.6rem;
+color: white;
+order: 1;
+${Media.medium`
+font-size: 1.5rem;`}
+${Media.small`
+font-size: 1.2rem;
+width: 100%`}
+${Media.tiny`
+width: 100%;
+`}
+
 `;
