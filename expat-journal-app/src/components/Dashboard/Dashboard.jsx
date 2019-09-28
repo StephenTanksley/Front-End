@@ -63,9 +63,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Container>
-        <h1>My Adventures</h1>
-      </Container>
+      
       <JournalForm
         key={toggle}
         toggle={toggle}

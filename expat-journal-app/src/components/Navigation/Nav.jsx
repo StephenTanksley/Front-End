@@ -1,5 +1,5 @@
 import React from "react";
-import { NavContainer, NavItem } from "../Styles/Styles";
+import { NavContainer, NavItem , BrandTitle} from "../Styles/Styles";
 
 const Nav = () => {
   return (
@@ -8,19 +8,21 @@ const Nav = () => {
             <NavItem exact to={`/`}>Home</NavItem>
         </div> */}
 
-      <div className="sign-up">
+      {/* <div className="sign-up"> */}
+
+        <BrandTitle>Expat Journal</BrandTitle>
         <NavItem to={`/sign-up`}>SignUp</NavItem>
-      </div>
+     
 
-      <div className="login">
+      {/* <div className="login"> */}
         <NavItem to="login">Login</NavItem>
-      </div>
+      {/* </div> */}
 
-      <div className="home">
+      {/* <div className="home"> */}
         <NavItem exact to="/">
           Dashboard
         </NavItem>
-      </div>
+      {/* </div> */}
     </NavContainer>
   );
 };

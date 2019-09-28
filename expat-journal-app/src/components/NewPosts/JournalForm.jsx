@@ -113,7 +113,7 @@ function JournalForm(props, toggle, picture, setPicture) {
 
   return (
     <div className="new-entry">
-      <Container>{props.toggle ? <p> Editing </p> : <p> Adding </p>}</Container>
+      <Container>{props.toggle ? <p> Edit this post </p> : <p> Add a post </p>}</Container>
 
       <Container>
         <form onSubmit={handleSubmit}>
