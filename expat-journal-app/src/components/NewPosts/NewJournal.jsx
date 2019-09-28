@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Photo } from '../Styles/Styles'
+import { Card, Container, Photo } from '../Styles/Styles'
 import { CardBody, CardTitle, CardSubtitle } from 'reactstrap'
 import { axiosWithAuth as axios } from '../axiosutil'
 
@@ -40,6 +40,7 @@ const NewJournal = props => {
 
   return (
     <Card>
+      <Container>
       <CardBody>
         <div>
         <Photo src={entry.imageURL} alt="a user supplied image" />
@@ -62,6 +63,7 @@ const NewJournal = props => {
           </button>
         </div>
       </CardBody>
+      </Container>
     </Card>
   )
 }

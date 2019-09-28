@@ -63,7 +63,7 @@ export const SomeForm = styled.div`
 export const NavContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   background-color: lightgray;
   width: 100%;
