@@ -5,7 +5,6 @@ import UserSignup from "./components/LoginSignin/UserSignup";
 import UserLogin from "./components/LoginSignin/UserLogin";
 import Nav from "../src/components/Navigation/Nav";
 import Dashboard from "./components/Dashboard/Dashboard";
-import { Container } from "./components/Styles/Styles";
 
 function App() {
   return (
