@@ -68,6 +68,7 @@ export const NavContainer = styled.div`
   background-color: lightgray;
   width: 100%;
   flex-wrap: wrap
+  margin-bottom: .7rem;
   ${Media.tiny`
   ;`}
   
